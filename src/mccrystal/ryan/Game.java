@@ -12,7 +12,8 @@ public class Game extends JPanel implements Runnable {
     public static final int DEFAULT_WINDOW_HEIGHT = 1080;
     public static final String WINDOWTITLE = "Platformer";
 
-    public static final int TICKRATE = 1;
+    public static final long TICKRATE = 2;
+    public static int ticks = 0;
     private int windowLength = DEFAULT_WINDOW_LENGTH;
     private int windowHeight = DEFAULT_WINDOW_HEIGHT;
 
@@ -40,28 +41,32 @@ public class Game extends JPanel implements Runnable {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         currentWorld.render(g2d);
-        System.out.println("Paint");
+        for (Entity e : currentWorld.getEntityList()) {
+            e.render(g2d);
+        }
     }
 
     public void run() {
-        this.init();
+        init();
         while(isRunning) {
             tick();
             try {
-                Thread.sleep((1 / Game.TICKRATE) * 1000);
+                this.thread.sleep((long) (1.0 / Game.TICKRATE) * 1000); //TODO: Fix this running super fast
             } catch(InterruptedException e) {
-                this.stopGame();
+                stopGame();
             }
         }
     }
     private void init() {
-        currentWorld.addEntity(new Player(500, 800, 100, 200));//Create a new player object for testing
+        Entity player = new Player(500, 800, 100, 200);
+        currentWorld.addEntity(player);//Create a new player object for testing
     }
     private void tick() {
+        currentWorld.tick();
         for(Entity e : currentWorld.getEntityList()) {
             e.tick();
         }
-
+        System.out.println(ticks++);
     }
     private void render() {
         repaint();

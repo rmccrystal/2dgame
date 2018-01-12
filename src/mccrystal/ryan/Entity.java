@@ -3,11 +3,11 @@ package mccrystal.ryan;
 import java.awt.*;
 
 public abstract class Entity {
-    protected float positionX; //Position of entity
-    protected float positionY;
+    protected float positionX = 0; //Position of entity
+    protected float positionY = 0;
 
-    protected float velocityX; //velocity of entity
-    protected float velocityY;
+    protected float velocityX = 0; //velocity of entity
+    protected float velocityY = 0;
 
     protected float width;
     protected float height;
@@ -38,7 +38,7 @@ public abstract class Entity {
         positionY += velocityY;
         positionX += velocityX;
         if(hasGravity) {
-            positionY += currentWorld.getGravitiy();
+            positionY += 1;//currentWorld.getGravitiy(); //TODO: Get this working
         }
     }
     public void render(Graphics2D graphics) {

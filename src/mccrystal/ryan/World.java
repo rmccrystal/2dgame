@@ -1,12 +1,13 @@
 package mccrystal.ryan;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public abstract class World {
     private boolean isActive;
 
-    private LinkedList<Entity> entityList;
+    private LinkedList<Entity> entityList = new LinkedList<Entity>();
 
     private float gravitiy;
 
