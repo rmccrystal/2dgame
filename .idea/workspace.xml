@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="660c5e34-97b0-4471-bd07-bb319225d894" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mccrystal/ryan/entities/Player.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mccrystal/ryan/Entity.java" afterPath="$PROJECT_DIR$/src/mccrystal/ryan/Entity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mccrystal/ryan/World.java" afterPath="$PROJECT_DIR$/src/mccrystal/ryan/World.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mccrystal/ryan/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1148">
-              <caret line="28" column="48" lean-forward="false" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
+            <state relative-caret-position="697">
+              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
                 <element signature="e#1621#1622#0" expanded="true" />
                 <element signature="e#1654#1655#0" expanded="true" />
@@ -40,15 +43,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Entity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mccrystal/ryan/Entity.java">
+      <file leaf-file-name="2dgame.iml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/2dgame.iml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1301">
-              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-              <folding>
-                <element signature="e#471#472#0" expanded="true" />
-                <element signature="e#503#504#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -56,17 +56,46 @@
       <file leaf-file-name="World.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mccrystal/ryan/World.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="779">
-              <caret line="19" column="22" lean-forward="true" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+            <state relative-caret-position="727">
+              <caret line="24" column="34" lean-forward="true" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
               <folding>
                 <element signature="e#219#220#0" expanded="true" />
                 <element signature="e#250#251#0" expanded="true" />
                 <element signature="e#283#284#0" expanded="true" />
                 <element signature="e#314#315#0" expanded="true" />
-                <element signature="e#363#364#0" expanded="true" />
+                <element signature="e#358#359#0" expanded="true" />
                 <element signature="e#396#397#0" expanded="true" />
                 <element signature="e#443#444#0" expanded="true" />
-                <element signature="e#483#484#0" expanded="true" />
+                <element signature="e#484#485#0" expanded="true" />
+                <element signature="e#533#534#0" expanded="true" />
+                <element signature="e#566#567#0" expanded="true" />
+                <element signature="e#613#614#0" expanded="true" />
+                <element signature="e#653#654#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Entity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mccrystal/ryan/Entity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="943">
+              <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+              <folding>
+                <element signature="e#780#781#0" expanded="true" />
+                <element signature="e#812#813#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/mccrystal/ryan/entities/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="410">
+              <caret line="10" column="63" lean-forward="false" selection-start-line="10" selection-start-column="63" selection-end-line="10" selection-end-column="63" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -91,6 +120,15 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>private float positionX\; \/\/Position of entity\n    private float positionY\;\n\n    private float velocityX\; \/\/velocity of entity\n    private float velocityY\;\n\n    private float width\;\n    private float height\;\n\n    private boolean hasCollision\;\n    private boolean hasGravity\;\n    private boolean canMove\;\n    private boolean isVisible\;\n\n    private World currentWorld\;</find>
+      <find>private</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>protected</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -104,9 +142,10 @@
       <list>
         <option value="$PROJECT_DIR$/src/mccrystal/ryan/Main.java" />
         <option value="$PROJECT_DIR$/src/mccrystal/ryan/Window.java" />
-        <option value="$PROJECT_DIR$/src/mccrystal/ryan/Entity.java" />
         <option value="$PROJECT_DIR$/src/mccrystal/ryan/Game.java" />
         <option value="$PROJECT_DIR$/src/mccrystal/ryan/World.java" />
+        <option value="$PROJECT_DIR$/src/mccrystal/ryan/Entity.java" />
+        <option value="$PROJECT_DIR$/src/mccrystal/ryan/entities/Player.java" />
       </list>
     </option>
   </component>
@@ -234,7 +273,7 @@
       <option name="presentableId" value="Default" />
       <updated>1515724149009</updated>
       <workItem from="1515724150284" duration="1689000" />
-      <workItem from="1515728736663" duration="3788000" />
+      <workItem from="1515728736663" duration="5075000" />
     </task>
     <task id="LOCAL-00001" summary="Added getters and setters">
       <created>1515733309263</created>
@@ -250,11 +289,18 @@
       <option name="project" value="LOCAL" />
       <updated>1515733397091</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added getters and setters">
+      <created>1515733403814</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1515733403814</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5477000" />
+    <option name="totallyTimeSpent" value="6764000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -356,17 +402,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mccrystal/ryan/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1301">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding>
-            <element signature="e#471#472#0" expanded="true" />
-            <element signature="e#503#504#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/mccrystal/ryan/Window.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
@@ -375,30 +410,71 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/mccrystal/ryan/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#1621#1622#0" expanded="true" />
+            <element signature="e#1654#1655#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2dgame.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/util/LinkedList.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4018">
+          <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/mccrystal/ryan/World.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="779">
-          <caret line="19" column="22" lean-forward="true" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+        <state relative-caret-position="727">
+          <caret line="24" column="34" lean-forward="true" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
           <folding>
             <element signature="e#219#220#0" expanded="true" />
             <element signature="e#250#251#0" expanded="true" />
             <element signature="e#283#284#0" expanded="true" />
             <element signature="e#314#315#0" expanded="true" />
-            <element signature="e#363#364#0" expanded="true" />
+            <element signature="e#358#359#0" expanded="true" />
             <element signature="e#396#397#0" expanded="true" />
             <element signature="e#443#444#0" expanded="true" />
-            <element signature="e#483#484#0" expanded="true" />
+            <element signature="e#484#485#0" expanded="true" />
+            <element signature="e#533#534#0" expanded="true" />
+            <element signature="e#566#567#0" expanded="true" />
+            <element signature="e#613#614#0" expanded="true" />
+            <element signature="e#653#654#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mccrystal/ryan/Game.java">
+    <entry file="file://$PROJECT_DIR$/src/mccrystal/ryan/Entity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1148">
-          <caret line="28" column="48" lean-forward="false" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
+        <state relative-caret-position="943">
+          <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
           <folding>
-            <element signature="e#1621#1622#0" expanded="true" />
-            <element signature="e#1654#1655#0" expanded="true" />
+            <element signature="e#780#781#0" expanded="true" />
+            <element signature="e#812#813#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mccrystal/ryan/entities/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="10" column="63" lean-forward="false" selection-start-line="10" selection-start-column="63" selection-end-line="10" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

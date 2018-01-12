@@ -17,6 +17,14 @@ public abstract class World {
         return isActive;
     }
 
+    public void addEntity(Entity entity) {
+        entityList.add(entity);
+    }
+
+    public void removeEntity(Entity entity) {
+        entityList.remove(entity);
+    }
+
     public LinkedList<Entity> getEntityList() {
         return entityList;
     }
