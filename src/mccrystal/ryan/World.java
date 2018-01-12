@@ -1,5 +1,6 @@
 package mccrystal.ryan;
 
+import java.awt.*;
 import java.util.LinkedList;
 
 public abstract class World {
@@ -7,7 +8,9 @@ public abstract class World {
 
     private LinkedList<Entity> entityList;
 
-    public float gravitiy;
+    private float gravitiy;
+
+    private Color backgroundColor;
 
     public float getGravitiy() {
         return gravitiy;
@@ -15,6 +18,10 @@ public abstract class World {
 
     public boolean isActive() {
         return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public void addEntity(Entity entity) {
@@ -33,5 +40,15 @@ public abstract class World {
         this.gravitiy = gravitiy;
     }
 
-    public abstract void render();
+    public World(boolean isActive, float gravitiy, Color backgroundColor) {
+        this.isActive = isActive;
+        this.gravitiy = gravitiy;
+        this.backgroundColor = backgroundColor;
+    }
+
+    public void render(Graphics2D g) {
+        g.setColor(backgroundColor);
+        g.fillRect(0, 0, Game.DEFAULT_WINDOW_LENGTH, Game.DEFAULT_WINDOW_HEIGHT);
+    }
+    public void tick() {}
 }
