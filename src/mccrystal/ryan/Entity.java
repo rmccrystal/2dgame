@@ -3,27 +3,35 @@ package mccrystal.ryan;
 import java.awt.*;
 
 public abstract class Entity {
-    float positionX; //Position of entity
-    float positionY;
+    private float positionX; //Position of entity
+    private float positionY;
 
-    float velocityX; //velocity of entity
-    float velocityY;
+    private float velocityX; //velocity of entity
+    private float velocityY;
 
-    float width;
-    float height;
+    private float width;
+    private float height;
 
-    boolean hasCollision;
-    boolean hasGravity;
-    boolean canMove;
+    private boolean hasCollision;
+    private boolean hasGravity;
+    private boolean canMove;
+    private boolean isVisible;
 
-    float gravity
+    private World currentWorld;
 
     public void tick() {
+        updatePosition();
+    }
+
+    public void updatePosition() {
         if(!canMove) return;
-        velocityY
+        positionY += velocityY;
+        positionX += velocityX;
         if(hasGravity) {
-            positionY += velocityY;
+            positionY += currentWorld.getGravitiy();
         }
     }
     public abstract void render();
+
+
 }

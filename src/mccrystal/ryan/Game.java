@@ -7,11 +7,11 @@ public class Game implements Runnable {
 
     public static final int TICKRATE = 16;
 
-    public int windowLength = DEFAULT_WINDOW_LENGTH;
-    public int windowHeight = DEFAULT_WINDOW_HEIGHT;
-    public String windowTitle = "Platformer";
+    private int windowLength = DEFAULT_WINDOW_LENGTH;
+    private int windowHeight = DEFAULT_WINDOW_HEIGHT;
+    private String windowTitle = "Platformer";
 
-    public boolean isRunning = false; //Bool if game is running
+    private boolean isRunning = false; //Bool if game is running
     private Thread thread;
 
     public Game(int windowLength, int windowHeight, String title) {

@@ -1,3 +1,7 @@
 package mccrystal.ryan;
 
-public class Window extends JFrame
+import javax.swing.*;
+
+public class Window extends JFrame {
+
+}
