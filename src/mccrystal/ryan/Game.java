@@ -51,14 +51,15 @@ public class Game extends JPanel implements Runnable {
         while(isRunning) {
             tick();
             try {
-                this.thread.sleep((long) (1.0 / Game.TICKRATE) * 1000); //TODO: Fix this running super fast
+                Thread.sleep(200);
+                //this.thread.sleep((long) (1.0 / Game.TICKRATE) * 1000); //TODO: Fix this running super fast
             } catch(InterruptedException e) {
                 stopGame();
             }
         }
     }
     private void init() {
-        Entity player = new Player(500, 800, 100, 200);
+        Entity player = new Player(500, 100, 100, 200, currentWorld);
         currentWorld.addEntity(player);//Create a new player object for testing
     }
     private void tick() {

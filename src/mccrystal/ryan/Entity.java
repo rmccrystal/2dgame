@@ -21,12 +21,21 @@ public abstract class Entity {
 
     protected World currentWorld;
 
-    public Entity(float positionX, float positionY, float width, float height, Color color) {
+    public Entity(float positionX, float positionY, float width, float height, Color color, World world) {
         this.positionX = positionX;
         this.positionY = positionY;
         this.width = width;
         this.height = height;
         this.color = color;
+        this.currentWorld = world;
+    }
+
+    public World getWorld() {
+        return currentWorld;
+    }
+
+    public void setWorld(World currentWorld) {
+        this.currentWorld = currentWorld;
     }
 
     public void tick() {
@@ -38,7 +47,7 @@ public abstract class Entity {
         positionY += velocityY;
         positionX += velocityX;
         if(hasGravity) {
-            positionY += 1;//currentWorld.getGravitiy(); //TODO: Get this working
+            velocityY += currentWorld.getGravitiy(); //TODO: Get this working
         }
     }
     public void render(Graphics2D graphics) {
