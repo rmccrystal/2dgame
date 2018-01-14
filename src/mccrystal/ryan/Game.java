@@ -69,6 +69,7 @@ public class Game extends JPanel implements Runnable {
         ticks++;
     }
     private void render() {
+        Toolkit.getDefaultToolkit().sync(); //Running this fixes framerate issues on Linux
         repaint();
     }
 
