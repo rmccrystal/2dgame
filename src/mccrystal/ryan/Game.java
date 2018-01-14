@@ -48,15 +48,19 @@ public class Game extends JPanel implements Runnable {
         init();
         while(isRunning) {
             long time = System.nanoTime();
+            long sleepAmount = 1000 / Game.TICKRATE;
             tick();
             render();
+            long msPassed = (System.nanoTime() - time)/1000000;
+            sleepAmount = sleepAmount - msPassed;  //Subtract the number of ms it took to tick and render to make it have consistent tickrate
+            sleepAmount = (sleepAmount > 0) ? sleepAmount : 0;  //If it took longer than one tick, set the delay to zero.
             try {
-                long sleepAmount = 1000 / Game.TICKRATE;
+
                 Thread.sleep(sleepAmount);
             } catch(InterruptedException e) {
                 stopGame();
             }
-            System.out.println((System.nanoTime() - time)/100000);
+            System.out.println((System.nanoTime() - time)/1000000);
         }
     }
     private void init() {
@@ -65,7 +69,6 @@ public class Game extends JPanel implements Runnable {
     }
     private void tick() {
         currentWorld.tick();
-
         ticks++;
     }
     private void render() {
