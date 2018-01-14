@@ -21,13 +21,12 @@ public abstract class Entity {
 
     protected World currentWorld;
 
-    public Entity(float positionX, float positionY, float width, float height, Color color, World world) {
+    public Entity(float positionX, float positionY, float width, float height, Color color) {
         this.positionX = positionX;
         this.positionY = positionY;
         this.width = width;
         this.height = height;
         this.color = color;
-        this.currentWorld = world;
     }
 
     public World getWorld() {

@@ -27,6 +27,7 @@ public abstract class World {
 
     public void addEntity(Entity entity) {
         entityList.add(entity);
+        entity.setWorld(this);
     }
 
     public void removeEntity(Entity entity) {
@@ -50,6 +51,13 @@ public abstract class World {
     public void render(Graphics2D g) {
         g.setColor(backgroundColor);
         g.fillRect(0, 0, Game.DEFAULT_WINDOW_LENGTH, Game.DEFAULT_WINDOW_HEIGHT);
+        for (Entity e : getEntityList()) {
+            e.render(g);
+        }
     }
-    public void tick() {}
+    public void tick() {
+        for(Entity e : getEntityList()) {
+            e.tick();
+        }
+    }
 }

@@ -12,12 +12,12 @@ public class Game extends JPanel implements Runnable {
     public static final int DEFAULT_WINDOW_HEIGHT = 1080;
     public static final String WINDOWTITLE = "Platformer";
 
-    public static final long TICKRATE = 2;
+    public static final long TICKRATE = 60; //Should be 60
     public static int ticks = 0;
     private int windowLength = DEFAULT_WINDOW_LENGTH;
     private int windowHeight = DEFAULT_WINDOW_HEIGHT;
 
-    private World currentWorld = new World(true, 1, Color.BLACK) {
+    private World currentWorld = new World(true, 0.1f, Color.BLACK) {
         @Override
         public void render(Graphics2D g) {
             super.render(g);
@@ -41,33 +41,32 @@ public class Game extends JPanel implements Runnable {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         currentWorld.render(g2d);
-        for (Entity e : currentWorld.getEntityList()) {
-            e.render(g2d);
-        }
+
     }
 
     public void run() {
         init();
         while(isRunning) {
+            long time = System.nanoTime();
             tick();
+            render();
             try {
-                Thread.sleep(200);
-                //this.thread.sleep((long) (1.0 / Game.TICKRATE) * 1000); //TODO: Fix this running super fast
+                long sleepAmount = 1000 / Game.TICKRATE;
+                Thread.sleep(sleepAmount);
             } catch(InterruptedException e) {
                 stopGame();
             }
+            System.out.println((System.nanoTime() - time)/100000);
         }
     }
     private void init() {
-        Entity player = new Player(500, 100, 100, 200, currentWorld);
+        Entity player = new Player(500, 100, 100, 200);
         currentWorld.addEntity(player);//Create a new player object for testing
     }
     private void tick() {
         currentWorld.tick();
-        for(Entity e : currentWorld.getEntityList()) {
-            e.tick();
-        }
-        System.out.println(ticks++);
+
+        ticks++;
     }
     private void render() {
         repaint();
@@ -78,10 +77,11 @@ public class Game extends JPanel implements Runnable {
             this.isRunning = true;
             this.thread = new Thread(this); //Create new thread of the run() function
             this.thread.start();
+            /*
             this.renderThread = new Thread(new Runnable() { //New thread to render everything much faster than tickrate
                 @Override
                 public void run() {
-                    while(isRunning) {
+                    while(isRunning) {          //This code is only necissary if frames change every tick
                         render();
                         try {
                             Thread.sleep(10);
@@ -92,6 +92,7 @@ public class Game extends JPanel implements Runnable {
                 }
             });
             this.renderThread.start();
+            */
         }
     }
     public synchronized void stopGame() {
