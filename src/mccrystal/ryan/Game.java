@@ -1,5 +1,6 @@
 package mccrystal.ryan;
 
+import mccrystal.ryan.entities.Ground;
 import mccrystal.ryan.entities.Player;
 
 import javax.swing.*;
@@ -55,17 +56,21 @@ public class Game extends JPanel implements Runnable {
             sleepAmount = sleepAmount - msPassed;  //Subtract the number of ms it took to tick and render to make it have consistent tickrate
             sleepAmount = (sleepAmount > 0) ? sleepAmount : 0;  //If it took longer than one tick, set the delay to zero.
             try {
-
                 Thread.sleep(sleepAmount);
             } catch(InterruptedException e) {
                 stopGame();
             }
-            System.out.println((System.nanoTime() - time)/1000000);
+            //System.out.println(sleepAmount + msPassed);
+//            long renderTime = (System.nanoTime() - time)/1000000;
+//            System.out.println("Tick and render took " + renderTime + " ms. Should take " + totalSleepAmount + " ms.\n" +
+//            "Tick and render was " + Math.abs(renderTime - sleepAmount) + " ms off\n");
         }
     }
     private void init() {
         Entity player = new Player(500, 100, 100, 200);
         currentWorld.addEntity(player);//Create a new player object for testing
+        currentWorld.addEntity(new Ground(0, 900, 2000, 60, Color.GREEN));
+        currentWorld.addEntity(new Ground(1200, 700, 200, 20, Color.MAGENTA));
     }
     private void tick() {
         currentWorld.tick();

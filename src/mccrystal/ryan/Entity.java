@@ -1,5 +1,7 @@
 package mccrystal.ryan;
 
+import mccrystal.ryan.entities.Ground;
+
 import java.awt.*;
 
 public abstract class Entity {
@@ -18,6 +20,7 @@ public abstract class Entity {
     protected boolean hasGravity;
     protected boolean canMove;
     protected boolean isVisible;
+    protected boolean onGround = false;
 
     protected World currentWorld;
 
@@ -41,14 +44,32 @@ public abstract class Entity {
         updatePosition();
     }
 
+    public boolean intersectsGround() {
+        for(Entity e : getWorld().getEntityList()) {
+            if(e instanceof Ground) {
+                Ground ground = (Ground) e;
+                if(new Rectangle((int) positionX, (int) positionY, (int) width, (int) height).contains(ground.positionX, ground.positionY, ground.width, ground.height)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void updatePosition() {
         if(!canMove) return;
+        if(intersectsGround()) {
+            velocityY = 0;
+            onGround = true;
+            System.out.println("Intersects Ground");
+        }
         positionY += velocityY;
         positionX += velocityX;
-        if(hasGravity) {
+        if(hasGravity && !onGround) {
             velocityY += currentWorld.getGravitiy(); //TODO: Get this working
         }
     }
+
     public void render(Graphics2D graphics) {
         graphics.setColor(color);
         graphics.fillRect((int) positionX, (int) positionY, (int) width, (int) height);
