@@ -50,7 +50,7 @@ public abstract class Entity {
         for(Entity e : getWorld().getEntityList()) {
             if(e instanceof Ground) {
                 Ground ground = (Ground) e;
-                Rectangle hisRectangle = new Rectangle((int) positionX, (int) positionY, (int) width, (int) height
+                //Rectangle hisRectangle = new Rectangle((int) positionX, (int) positionY, (int) width, (int) height
                 if(new Rectangle((int) positionX, (int) positionY, (int) width, (int) height).contains(ground.positionX, ground.positionY, ground.width, ground.height)) { //TODO: This checks if the ground COMPLETELY contains the object. You need to create your own function to check if two rectangles are touching
                     return true;
                 }
