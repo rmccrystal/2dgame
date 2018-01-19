@@ -24,7 +24,7 @@ public abstract class Entity {
 
     protected World currentWorld;
 
-    protected Rectangle rectangle;
+    //protected Rectangle rectangle;
 
     public Entity(float positionX, float positionY, float width, float height, Color color) {
         this.positionX = positionX;
@@ -47,6 +47,8 @@ public abstract class Entity {
     }
 
     public boolean intersectsGround() {
+        return this.positionY > 700; //FOR TESTING
+        /*
         for(Entity e : getWorld().getEntityList()) {
             if(e instanceof Ground) {
                 Ground ground = (Ground) e;
@@ -56,7 +58,7 @@ public abstract class Entity {
                 }
             }
         }
-        return false;
+        return false; */
     }
 
     public void updatePosition() {
@@ -64,7 +66,9 @@ public abstract class Entity {
         if(intersectsGround()) {
             velocityY = 0;
             onGround = true;
-            System.out.println("Intersects Ground");
+            while(intersectsGround()) {
+                this.positionY++;
+            }
         }
         positionY += velocityY;
         positionX += velocityX;
