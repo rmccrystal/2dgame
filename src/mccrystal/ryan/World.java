@@ -13,6 +13,8 @@ public abstract class World {
 
     private Color backgroundColor;
 
+    public Game game;
+
     public float getGravitiy() {
         return gravitiy;
     }
@@ -42,10 +44,11 @@ public abstract class World {
         this.gravitiy = gravitiy;
     }
 
-    public World(boolean isActive, float gravitiy, Color backgroundColor) {
+    public World(Game g, boolean isActive, float gravitiy, Color backgroundColor) {
         this.isActive = isActive;
         this.gravitiy = gravitiy;
         this.backgroundColor = backgroundColor;
+        game = g;
     }
 
     public void render(Graphics2D g) {

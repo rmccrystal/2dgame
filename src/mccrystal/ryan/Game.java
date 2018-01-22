@@ -18,7 +18,9 @@ public class Game extends JPanel implements Runnable {
     private int windowLength = DEFAULT_WINDOW_LENGTH;
     private int windowHeight = DEFAULT_WINDOW_HEIGHT;
 
-    private World currentWorld = new World(true, 0.1f, Color.BLACK) {
+    public KeyHandler keyHandler = new KeyHandler();
+
+    private World currentWorld = new World(this, true, 0.1f, Color.BLACK) {
         @Override
         public void render(Graphics2D g) {
             super.render(g);
