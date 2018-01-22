@@ -15,10 +15,11 @@ public class Game extends JPanel implements Runnable {
 
     public static final long TICKRATE = 60; //Should be 60
     public static int ticks = 0;
+
     private int windowLength = DEFAULT_WINDOW_LENGTH;
     private int windowHeight = DEFAULT_WINDOW_HEIGHT;
 
-    public KeyHandler keyHandler = new KeyHandler();
+    private KeyHandler keyHandler = new KeyHandler();
 
     private World currentWorld = new World(this, true, 0.1f, Color.BLACK) {
         @Override
@@ -26,6 +27,10 @@ public class Game extends JPanel implements Runnable {
             super.render(g);
         }
     };
+
+    public KeyHandler getKeyHandler() {
+        return keyHandler;
+    }
 
     private boolean isRunning = false; //Bool if game is running
     private Thread thread;

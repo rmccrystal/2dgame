@@ -13,20 +13,20 @@ public abstract class World {
 
     private Color backgroundColor;
 
-    public Game game;
+    private Game game;
 
+    public Game getGame() {
+        return game;
+    }
     public float getGravitiy() {
         return gravitiy;
     }
-
     public boolean isActive() {
         return isActive;
     }
-
     public void setActive(boolean active) {
         isActive = active;
     }
-
     public void addEntity(Entity entity) {
         entityList.add(entity);
         entity.setWorld(this);

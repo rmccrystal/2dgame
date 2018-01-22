@@ -25,4 +25,11 @@ public class KeyHandler implements KeyListener {
     public ArrayList<KeyEvent> getKeysDown() {
         return keysDown;
     }
+
+    public boolean isPressed(int keyCode) {
+        for(KeyEvent e : keysDown) {
+            return e.getKeyCode() == keyCode;
+        }
+        return false;
+    }
 }

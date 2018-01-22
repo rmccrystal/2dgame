@@ -23,6 +23,9 @@ public class Player extends Entity {
     @Override
     public void tick() {
         super.tick();
+        if(this.getWorld().getGame().getKeyHandler().isPressed(KeyEvent.VK_SPACE)) {
+            this.jump();
+        }
     }
 
     private void jump() {
