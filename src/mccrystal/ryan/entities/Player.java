@@ -1,11 +1,13 @@
 package mccrystal.ryan.entities;
 
 import mccrystal.ryan.Entity;
+import mccrystal.ryan.KeyHandler;
 import mccrystal.ryan.World;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
 
 public class Player extends Entity {
 
@@ -24,17 +26,29 @@ public class Player extends Entity {
     public void tick() {
         super.tick();
         if(this.getWorld().getGame().getKeyHandler().isPressed(KeyEvent.VK_SPACE)) {
-            this.jump();
+            jump();
+        }
+        if(getKeyHandler().isPressed(KeyEvent.VK_LEFT)) {
+            moveLeft();
+        }
+        if(getKeyHandler().isPressed(KeyEvent.VK_RIGHT)) {
+            moveRight();
         }
     }
 
+    private KeyHandler getKeyHandler() {
+        return this.getWorld().getGame().getKeyHandler();
+    }
+
     private void jump() {
+        if(!onGround) return;
         this.velocityY = jumpFactor;
-        System.out.println("Jumping");
+        onGround = false;
+        System.out.println("jump");
     }
 
     private void moveLeft() {
-        this.positionY += moveSpeed;
+        this.positionX -= moveSpeed;
     }
 
     private void moveRight() {

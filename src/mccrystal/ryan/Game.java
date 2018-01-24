@@ -37,10 +37,15 @@ public class Game extends JPanel implements Runnable {
     private Thread renderThread;
 
     public Game() {
+        this.setPreferredSize(new Dimension(DEFAULT_WINDOW_LENGTH, DEFAULT_WINDOW_HEIGHT));
+        this.setFocusable(true);
+        this.requestFocus();
+
         frm.setTitle(WINDOWTITLE);
         frm.setSize(DEFAULT_WINDOW_LENGTH, DEFAULT_WINDOW_HEIGHT);
         frm.add(this);
-        frm.setResizable(false);
+        frm.setResizable(true);
+        frm.pack();
         frm.setVisible(true);
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -73,12 +78,19 @@ public class Game extends JPanel implements Runnable {
 //            "Tick and render was " + Math.abs(renderTime - sleepAmount) + " ms off\n");
         }
     }
+
     private void init() {
+        entityInit();
+        addKeyListener(getKeyHandler());
+    }
+
+    private void entityInit() {
         Entity player = new Player(500, 100, 100, 200);
         currentWorld.addEntity(player);//Create a new player object for testing
         currentWorld.addEntity(new Ground(0, 900, 2000, 60, Color.GREEN));
         currentWorld.addEntity(new Ground(1200, 700, 200, 20, Color.MAGENTA));
     }
+
     private void tick() {
         currentWorld.tick();
         ticks++;

@@ -20,7 +20,7 @@ public abstract class Entity {
     protected boolean hasGravity;
     protected boolean canMove;
     protected boolean isVisible;
-    protected boolean onGround = false;
+    protected boolean onGround;
 
     protected World currentWorld;
 
@@ -63,17 +63,20 @@ public abstract class Entity {
 
     public void updatePosition() {
         if(!canMove) return;
-        if(intersectsGround()) {
-            velocityY = 0;
+        if(intersectsGround() && !onGround) {
             onGround = true;
+            velocityY = 0;
             while(intersectsGround()) {
                 this.positionY++;
             }
         }
-        positionY += velocityY;
+        if(onGround) {
+
+        }
+        positionY -= velocityY;
         positionX += velocityX;
         if(hasGravity && !onGround) {
-            velocityY += currentWorld.getGravitiy();
+            velocityY -= currentWorld.getGravitiy();
         }
     }
 

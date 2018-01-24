@@ -3,9 +3,10 @@ package mccrystal.ryan;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class KeyHandler implements KeyListener {
-    private ArrayList<KeyEvent> keysDown = new ArrayList<KeyEvent>();
+    private ArrayList<Integer> keysDown = new ArrayList<Integer>();
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -14,21 +15,21 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        keysDown.add(e);
+        keysDown.add(e.getKeyCode());
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-          keysDown.remove(e);
+        keysDown.removeAll(Collections.singleton(e.getKeyCode()));
     }
 
-    public ArrayList<KeyEvent> getKeysDown() {
+    public ArrayList<Integer> getKeysDown() {
         return keysDown;
     }
 
     public boolean isPressed(int keyCode) {
-        for(KeyEvent e : keysDown) {
-            return e.getKeyCode() == keyCode;
+        for(Integer e : keysDown) {
+            return e == keyCode;
         }
         return false;
     }
