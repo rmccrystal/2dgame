@@ -14,6 +14,8 @@ public class Player extends Entity {
     protected int jumpFactor = 10;
     protected int moveSpeed = 5;
 
+    protected boolean jumping = false;
+
     public Player(float positionX, float positionY, float width, float height) {
         super(positionX, positionY, width, height, Color.CYAN);
         canMove = true;
@@ -44,6 +46,7 @@ public class Player extends Entity {
         if(!onGround) return;
         this.velocityY = jumpFactor;
         onGround = false;
+        jumping = true;
         System.out.println("jump");
     }
 

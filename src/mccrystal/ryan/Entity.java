@@ -46,7 +46,7 @@ public abstract class Entity {
         updatePosition();
     }
 
-    public boolean intersectsGround() {
+    protected boolean intersectsGround() {
         return this.positionY > 700; //FOR TESTING
         /*
         for(Entity e : getWorld().getEntityList()) {
@@ -60,6 +60,7 @@ public abstract class Entity {
         }
         return false; */
     }
+
 
     public void updatePosition() {
         if(!canMove) return;
