@@ -12,7 +12,7 @@ import java.security.Key;
 public class Player extends Entity {
 
     protected int jumpFactor = 10;
-    protected int moveSpeed = 5;
+    protected int moveSpeed = 10;
 
     protected boolean jumping = false;
 

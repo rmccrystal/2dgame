@@ -3,6 +3,7 @@ package mccrystal.ryan;
 import mccrystal.ryan.entities.Ground;
 
 import java.awt.*;
+import java.awt.geom.Area;
 
 public abstract class Entity {
     protected float positionX = 0; //Position of entity
@@ -47,18 +48,19 @@ public abstract class Entity {
     }
 
     protected boolean intersectsGround() {
-        return this.positionY > 700; //FOR TESTING
-        /*
         for(Entity e : getWorld().getEntityList()) {
             if(e instanceof Ground) {
                 Ground ground = (Ground) e;
-                //Rectangle hisRectangle = new Rectangle((int) positionX, (int) positionY, (int) width, (int) height
-                if(new Rectangle((int) positionX, (int) positionY, (int) width, (int) height).contains(ground.positionX, ground.positionY, ground.width, ground.height)) { //TODO: This checks if the ground COMPLETELY contains the object. You need to create your own function to check if two rectangles are touching
+                Area a = new Area();
+                Area thisArea = new Area(new Rectangle((int) positionX, (int) positionY, (int) width, (int) height));
+                Area groundArea = new Area(new Rectangle((int) ((Ground) e).positionX, (int) ((Ground) e).positionY, (int) ((Ground) e).width, (int) ((Ground) e).height));
+                thisArea.intersect(groundArea);
+                if(!thisArea.isEmpty()) {
                     return true;
                 }
             }
         }
-        return false; */
+        return false;
     }
 
 
