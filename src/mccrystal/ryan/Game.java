@@ -21,12 +21,7 @@ public class Game extends JPanel implements Runnable {
 
     private KeyHandler keyHandler = new KeyHandler();
 
-    private World currentWorld = new World(this, true, 0.1f, Color.BLACK) {
-        @Override
-        public void render(Graphics2D g) {
-            super.render(g);
-        }
-    };
+    private World currentWorld = new World(this, true, 0.5f, Color.BLACK);
 
     public KeyHandler getKeyHandler() {
         return keyHandler;

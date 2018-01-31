@@ -11,7 +11,7 @@ import java.security.Key;
 
 public class Player extends Entity {
 
-    protected int jumpFactor = 10;
+    protected int jumpFactor = 25;
     protected int moveSpeed = 10;
 
     protected boolean jumping = false;
@@ -27,6 +27,11 @@ public class Player extends Entity {
     @Override
     public void tick() {
         super.tick();
+        handleKeys();
+    }
+
+
+    protected void handleKeys() {
         if(this.getWorld().getGame().getKeyHandler().isPressed(KeyEvent.VK_SPACE)) {
             jump();
         }
@@ -36,6 +41,12 @@ public class Player extends Entity {
         if(getKeyHandler().isPressed(KeyEvent.VK_RIGHT)) {
             moveRight();
         }
+    }
+
+    @Override
+    protected void updateYPos() {
+        if(onGround) return;
+        super.updateYPos();
     }
 
     private KeyHandler getKeyHandler() {

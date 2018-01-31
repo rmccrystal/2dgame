@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public abstract class World {
+public class World {
     private boolean isActive;
 
     private LinkedList<Entity> entityList = new LinkedList<Entity>();

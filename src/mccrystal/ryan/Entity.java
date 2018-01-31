@@ -5,7 +5,7 @@ import mccrystal.ryan.entities.Ground;
 import java.awt.*;
 import java.awt.geom.Area;
 
-public abstract class Entity {
+public class Entity {
     protected float positionX = 0; //Position of entity
     protected float positionY = 0;
 
@@ -47,7 +47,7 @@ public abstract class Entity {
         updatePosition();
     }
 
-    protected boolean intersectsGround() {
+    protected Ground intersectsGround() {
         for(Entity e : getWorld().getEntityList()) {
             if(e instanceof Ground) {
                 Ground ground = (Ground) e;
@@ -56,31 +56,55 @@ public abstract class Entity {
                 Area groundArea = new Area(new Rectangle((int) ((Ground) e).positionX, (int) ((Ground) e).positionY, (int) ((Ground) e).width, (int) ((Ground) e).height));
                 thisArea.intersect(groundArea);
                 if(!thisArea.isEmpty()) {
-                    return true;
+                    return ground;
                 }
             }
         }
-        return false;
+        return null;
     }
 
-
-    public void updatePosition() {
-        if(!canMove) return;
-        if(intersectsGround() && !onGround) {
+    protected void updateGround() {
+        if(intersectsGround() != null) {
             onGround = true;
+            Ground g = intersectsGround();
+            positionY = g.positionY - this.height;
             velocityY = 0;
-            while(intersectsGround()) {
-                this.positionY++;
-            }
         }
-        if(onGround) {
+    }
 
+    protected void updateOnGround() {
+        this.positionY += 1;
+        Ground ground = intersectsGround();
+        positionY -= 1;
+        if(ground == null) {
+            onGround = false;
+        } else {
+            onGround = true;
         }
+    }
+
+    protected void updateYPos() {
         positionY -= velocityY;
+
+    }
+
+    protected void updateXPos() {
         positionX += velocityX;
+    }
+
+    protected void updateVelocity() {
         if(hasGravity && !onGround) {
             velocityY -= currentWorld.getGravitiy();
         }
+    }
+
+    public void updatePosition() {
+        if(!canMove) return;
+        updateYPos();
+        updateXPos();
+        updateOnGround();
+        updateGround();
+        updateVelocity();
     }
 
     public void render(Graphics2D graphics) {
