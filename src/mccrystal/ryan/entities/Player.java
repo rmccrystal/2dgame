@@ -14,6 +14,8 @@ public class Player extends Entity {
     protected int jumpFactor = 25;
     protected int moveSpeed = 10;
 
+
+
     protected boolean jumping = false;
 
     public Player(float positionX, float positionY, float width, float height) {
@@ -26,13 +28,11 @@ public class Player extends Entity {
 
     @Override
     public void tick() {
-        super.tick();
         handleKeys();
+        super.tick();
     }
-
-
     protected void handleKeys() {
-        if(this.getWorld().getGame().getKeyHandler().isPressed(KeyEvent.VK_SPACE)) {
+        if(getKeyHandler().isPressed(KeyEvent.VK_SPACE)) {
             jump();
         }
         if(getKeyHandler().isPressed(KeyEvent.VK_LEFT)) {
@@ -58,7 +58,6 @@ public class Player extends Entity {
         this.velocityY = jumpFactor;
         onGround = false;
         jumping = true;
-        System.out.println("jump");
     }
 
     private void moveLeft() {

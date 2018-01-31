@@ -84,6 +84,7 @@ public class Game extends JPanel implements Runnable {
         currentWorld.addEntity(player);//Create a new player object for testing
         currentWorld.addEntity(new Ground(0, 900, 2000, 60, Color.GREEN));
         currentWorld.addEntity(new Ground(1200, 700, 200, 20, Color.MAGENTA));
+        currentWorld.addEntity(new Ground(600, 500, 200, 10, Color.YELLOW));
     }
 
     private void tick() {

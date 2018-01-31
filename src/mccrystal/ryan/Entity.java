@@ -6,11 +6,13 @@ import java.awt.*;
 import java.awt.geom.Area;
 
 public class Entity {
-    protected float positionX = 0; //Position of entity
-    protected float positionY = 0;
+    protected float positionX; //Position of entity
+    protected float positionY;
 
     protected float velocityX = 0; //velocity of entity
     protected float velocityY = 0;
+
+    protected int terminalVelocity = 100;
 
     protected float width;
     protected float height;
@@ -63,7 +65,16 @@ public class Entity {
         return null;
     }
 
-    protected void updateGround() {
+    protected void updateOnGround() { //Updates the variable onGround
+        this.positionY += 1;                //Moves the object down one pixel and tests if it is in the ground
+        Ground ground = intersectsGround();
+        positionY -= 1; //Move the object to it's original position
+        onGround = ground != null;
+    }
+
+    protected void updateYPos() {
+        if(velocityY >= terminalVelocity) velocityY = terminalVelocity; //Set speed limit
+        positionY -= velocityY;
         if(intersectsGround() != null) {
             onGround = true;
             Ground g = intersectsGround();
@@ -72,24 +83,22 @@ public class Entity {
         }
     }
 
-    protected void updateOnGround() {
-        this.positionY += 1;
-        Ground ground = intersectsGround();
-        positionY -= 1;
-        if(ground == null) {
-            onGround = false;
-        } else {
-            onGround = true;
-        }
-    }
-
-    protected void updateYPos() {
-        positionY -= velocityY;
-
-    }
-
     protected void updateXPos() {
         positionX += velocityX;
+        /*
+        positionX += 1; //Moves the character one to the right and tests if it is intersecting the ground
+        Ground groundLeft = intersectsGround();
+        positionX -= 2;
+        Ground groundRight = intersectsGround();
+        positionX += 1; //Get ground object for both sides
+        if(groundLeft != null) {
+            velocityX = 0; //If the character is touching the ground after moving to the right, set x velocity to 0 then set location to the left side of object
+            positionX = groundLeft.positionX - width;
+        }
+        if(groundRight != null) {
+            velocityX = 0;
+            positionX = groundRight.positionX;
+        }*/ //TODO: Get this working.
     }
 
     protected void updateVelocity() {
@@ -103,13 +112,12 @@ public class Entity {
         updateYPos();
         updateXPos();
         updateOnGround();
-        updateGround();
         updateVelocity();
     }
 
     public void render(Graphics2D graphics) {
         graphics.setColor(color);
-        graphics.fillRect((int) positionX, (int) positionY, (int) width, (int) height); //TODO: Replace this with a rectangle object and use graphics.draw(shape)
+        graphics.fillRect((int) positionX, (int) positionY, (int) width, (int) height);
     }
 
 
