@@ -14,8 +14,6 @@ public class Player extends Entity {
     protected int jumpFactor = 25;
     protected int moveSpeed = 10;
 
-
-
     protected boolean jumping = false;
 
     public Player(float positionX, float positionY, float width, float height) {
@@ -31,6 +29,7 @@ public class Player extends Entity {
         handleKeys();
         super.tick();
     }
+    /** handleKeys checks if keys are pressed and does the appropriate action */
     protected void handleKeys() {
         if(getKeyHandler().isPressed(KeyEvent.VK_SPACE)) {
             jump();

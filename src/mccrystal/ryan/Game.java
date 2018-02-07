@@ -6,7 +6,7 @@ import mccrystal.ryan.entities.Player;
 import javax.swing.*;
 import java.awt.*;
 
-public class Game extends JPanel implements Runnable {
+public class Game extends JPanel implements Runnable, Renderable {
     private JFrame frm = new JFrame();
 
     public static final int DEFAULT_WINDOW_LENGTH = 1920; //Default window height and length if no init value is given
@@ -49,7 +49,7 @@ public class Game extends JPanel implements Runnable {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         currentWorld.render(g2d);
-
+        this.render(g2d);
     }
 
     public void run() {
@@ -58,7 +58,7 @@ public class Game extends JPanel implements Runnable {
             long time = System.nanoTime();
             long sleepAmount = 1000 / Game.TICKRATE;
             tick();
-            render();
+            renderAll();
             long msPassed = (System.nanoTime() - time)/1000000;
             sleepAmount = sleepAmount - msPassed;  //Subtract the number of ms it took to tick and render to make it have consistent tickrate
             sleepAmount = (sleepAmount > 0) ? sleepAmount : 0;  //If it took longer than one tick, set the delay to zero.
@@ -91,11 +91,18 @@ public class Game extends JPanel implements Runnable {
         currentWorld.tick();
         ticks++;
     }
-    private void render() {
+    private void renderAll() {
         Toolkit.getDefaultToolkit().sync(); //Running this fixes framerate issues on Linux
         repaint();
     }
-
+    public void render(Graphics2D g) {
+        int a = 50;
+        for(Integer i : getKeyHandler().getKeysDown()) {
+            g.setColor(Color.WHITE);
+            g.drawString(i.toString(), 100, a);
+            a+=10;
+        }
+    }
     public synchronized void runGame() {
         if(!this.isRunning) { //Only start if game is not already running
             this.isRunning = true;

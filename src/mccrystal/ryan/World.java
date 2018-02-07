@@ -54,7 +54,7 @@ public class World {
     public void render(Graphics2D g) {
         g.setColor(backgroundColor);
         g.fillRect(0, 0, Game.DEFAULT_WINDOW_LENGTH, Game.DEFAULT_WINDOW_HEIGHT);
-        for (Entity e : getEntityList()) {
+        for (Renderable e : getEntityList()) {
             e.render(g);
         }
     }

@@ -5,7 +5,7 @@ import mccrystal.ryan.entities.Ground;
 import java.awt.*;
 import java.awt.geom.Area;
 
-public class Entity {
+public class Entity implements Renderable {
     protected float positionX; //Position of entity
     protected float positionY;
 
