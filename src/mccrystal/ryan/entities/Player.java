@@ -2,16 +2,13 @@ package mccrystal.ryan.entities;
 
 import mccrystal.ryan.Entity;
 import mccrystal.ryan.KeyHandler;
-import mccrystal.ryan.World;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.security.Key;
 
 public class Player extends Entity {
 
-    protected int jumpFactor = 25;
+    protected int jumpFactor = 20;
     protected int moveSpeed = 10;
 
     protected boolean jumping = false;

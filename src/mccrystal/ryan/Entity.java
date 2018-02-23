@@ -78,7 +78,12 @@ public class Entity implements Renderable {
         if(intersectsGround() != null) {
             onGround = true;
             Ground g = intersectsGround();
-            positionY = g.positionY - this.height;
+            if(velocityY < 0) {
+                positionY = g.positionY - this.height;
+            } else {
+                positionY = g.positionY + g.height;
+                onGround = false;
+            }
             velocityY = 0;
         }
     }

@@ -15,6 +15,7 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if(keysDown.contains(e.getKeyCode())) return;
         keysDown.add(e.getKeyCode());
     }
 
@@ -28,9 +29,6 @@ public class KeyHandler implements KeyListener {
     }
 
     public boolean isPressed(int keyCode) {
-        for(Integer e : keysDown) {
-            return e == keyCode;
-        }
-        return false;
+        return keysDown.contains(keyCode);
     }
 }
