@@ -90,20 +90,23 @@ public class Entity implements Renderable {
 
     protected void updateXPos() {
         positionX += velocityX;
-        /*
-        positionX += 1; //Moves the character one to the right and tests if it is intersecting the ground
-        Ground groundLeft = intersectsGround();
-        positionX -= 2;
-        Ground groundRight = intersectsGround();
-        positionX += 1; //Get ground object for both sides
-        if(groundLeft != null) {
-            velocityX = 0; //If the character is touching the ground after moving to the right, set x velocity to 0 then set location to the left side of object
-            positionX = groundLeft.positionX - width;
+    }
+
+    public enum Direction {UP, DOWN, LEFT, RIGHT}
+    public boolean isMovingDirection(Direction d) {
+        if(velocityY > 0) {
+            if(d == Direction.UP) return true;
         }
-        if(groundRight != null) {
-            velocityX = 0;
-            positionX = groundRight.positionX;
-        }*/ //TODO: Get this working.
+        if(velocityY < 0) {
+            if(d == Direction.DOWN) return true;
+        }
+        if(velocityX < 0) {
+            if(d == Direction.LEFT) return true;
+        }
+        if(velocityY > 0) {
+            if(d == Direction.RIGHT) return true;
+        }
+        return false;
     }
 
     protected void updateVelocity() {
@@ -121,6 +124,12 @@ public class Entity implements Renderable {
     }
 
     public void render(Graphics2D graphics) {
+        graphics.setColor(Color.WHITE);
+        graphics.drawString(isMovingDirection(Direction.UP) ? "UP" : "", 300, 300);
+        graphics.drawString(isMovingDirection(Direction.DOWN) ? "DOWN" : "", 300, 350);
+        graphics.drawString(isMovingDirection(Direction.LEFT) ? "LEFT" : "", 300, 400);
+        graphics.drawString(isMovingDirection(Direction.RIGHT) ? "RIGHT" : "", 300, 450);
+
         graphics.setColor(color);
         graphics.fillRect((int) positionX, (int) positionY, (int) width, (int) height);
     }
