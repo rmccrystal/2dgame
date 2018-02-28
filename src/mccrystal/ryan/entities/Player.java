@@ -10,11 +10,12 @@ public class Player extends Entity {
 
     protected int jumpFactor = 20;
     protected int moveSpeed = 10;
+    protected int acceleration = 1;
 
     protected boolean jumping = false;
 
     public Player(float positionX, float positionY, float width, float height) {
-        super(positionX, positionY, width, height, Color.CYAN);
+        super(positionX, positionY, width, height,1, Color.CYAN);
         canMove = true;
         hasGravity = true;
         hasCollision = true;
@@ -57,10 +58,12 @@ public class Player extends Entity {
     }
 
     private void moveLeft() {
-        this.positionX -= moveSpeed;
+        if(velocityX > -moveSpeed)
+            this.velocityX -= acceleration;
     }
 
     private void moveRight() {
-        this.positionX += moveSpeed;
+        if(velocityX < moveSpeed)
+            this.velocityX += acceleration;
     }
 }

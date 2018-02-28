@@ -9,6 +9,8 @@ public class Entity implements Renderable {
     protected float positionX; //Position of entity
     protected float positionY;
 
+    public float friction; //Speed at which an object moving on top of this object will decelerate
+
     protected float velocityX = 0; //velocity of entity
     protected float velocityY = 0;
 
@@ -29,11 +31,12 @@ public class Entity implements Renderable {
 
     //protected Rectangle rectangle;
 
-    public Entity(float positionX, float positionY, float width, float height, Color color) {
+    public Entity(float positionX, float positionY, float width, float height, float friction, Color color) {
         this.positionX = positionX;
         this.positionY = positionY;
         this.width = width;
         this.height = height;
+        this.friction = friction;
         this.color = color;
     }
 
@@ -72,24 +75,47 @@ public class Entity implements Renderable {
         onGround = ground != null;
     }
 
-    protected void updateYPos() {
+    protected void updateYVeloity() {
         if(velocityY >= terminalVelocity) velocityY = terminalVelocity; //Set speed limit
         positionY -= velocityY;
+
+    }
+
+    protected void updateXVelocity() {
+        positionX += velocityX;
+        if(onGround) {
+            Ground g = intersectsGround();
+            velocityX *= g.friction;
+        }
+    }
+
+    protected void updateYPos() {
+        updateYVeloity();
         if(intersectsGround() != null) {
             onGround = true;
             Ground g = intersectsGround();
-            if(velocityY < 0) {
+            if(isMovingDirection(Direction.DOWN)) {
                 positionY = g.positionY - this.height;
-            } else {
+                velocityY = 0;
+            } else if (isMovingDirection(Direction.UP)){
                 positionY = g.positionY + g.height;
                 onGround = false;
+                velocityY = 0;
             }
-            velocityY = 0;
         }
     }
 
     protected void updateXPos() {
-        positionX += velocityX;
+        updateXVelocity();
+        if(intersectsGround() != null) {
+            Ground g = intersectsGround();
+            if(isMovingDirection(Direction.LEFT)) {
+                positionX = g.positionX;
+
+            } else if(isMovingDirection(Direction.RIGHT)) {
+                positionX = g.positionX + g.width;
+            }
+        }
     }
 
     public enum Direction {UP, DOWN, LEFT, RIGHT}

@@ -80,11 +80,12 @@ public class Game extends JPanel implements Runnable, Renderable {
     }
 
     private void entityInit() {
+        float friciton = 0.9f;
         Entity player = new Player(500, 100, 100, 200);
         currentWorld.addEntity(player);//Create a new player object for testing
-        currentWorld.addEntity(new Ground(0, 900, 2000, 60, Color.GREEN));
-        currentWorld.addEntity(new Ground(1200, 700, 200, 20, Color.MAGENTA));
-        currentWorld.addEntity(new Ground(600, 500, 200, 10, Color.YELLOW));
+        currentWorld.addEntity(new Ground(0, 900, 2000, 60, friciton,  Color.GREEN));
+        currentWorld.addEntity(new Ground(1200, 700, 200, 20, friciton, Color.MAGENTA));
+        currentWorld.addEntity(new Ground(600, 500, 200, 10, friciton, Color.YELLOW));
     }
 
     private void tick() {
