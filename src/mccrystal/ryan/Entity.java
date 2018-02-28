@@ -9,6 +9,8 @@ public class Entity implements Renderable {
     protected float positionX; //Position of entity
     protected float positionY;
 
+    protected float lastGroundFriction = 1;
+
     public float friction; //Speed at which an object moving on top of this object will decelerate
 
     protected float velocityX = 0; //velocity of entity
@@ -83,7 +85,7 @@ public class Entity implements Renderable {
 
     protected void updateXVelocity() {
         positionX += velocityX;
-        if(onGround) {
+        if(intersectsGround() != null) {
             Ground g = intersectsGround();
             velocityX *= g.friction;
         }
@@ -109,10 +111,10 @@ public class Entity implements Renderable {
         updateXVelocity();
         if(intersectsGround() != null) {
             Ground g = intersectsGround();
-            if(isMovingDirection(Direction.LEFT)) {
+            if(isMovingDirection(Direction.RIGHT)) {
                 positionX = g.positionX;
 
-            } else if(isMovingDirection(Direction.RIGHT)) {
+            } else if(isMovingDirection(Direction.LEFT)) {
                 positionX = g.positionX + g.width;
             }
         }
@@ -143,8 +145,8 @@ public class Entity implements Renderable {
 
     public void updatePosition() {
         if(!canMove) return;
-        updateYPos();
         updateXPos();
+        updateYPos();
         updateOnGround();
         updateVelocity();
     }
