@@ -10,6 +10,7 @@ public class World {
     private LinkedList<Entity> entityList = new LinkedList<Entity>();
 
     private float gravitiy;
+    private float airResistance;
 
     private Color backgroundColor;
 
@@ -31,6 +32,12 @@ public class World {
         entityList.add(entity);
         entity.setWorld(this);
     }
+    public float getAirResistance() {
+        return airResistance;
+    }
+    public void setAirResistance(float airResistance) {
+        this.airResistance = airResistance;
+    }
 
     public void removeEntity(Entity entity) {
         entityList.remove(entity);
@@ -44,10 +51,11 @@ public class World {
         this.gravitiy = gravitiy;
     }
 
-    public World(Game g, boolean isActive, float gravitiy, Color backgroundColor) {
+    public World(Game g, boolean isActive, float gravitiy, float airResistance, Color backgroundColor) {
         this.isActive = isActive;
         this.gravitiy = gravitiy;
         this.backgroundColor = backgroundColor;
+        this.airResistance = airResistance;
         game = g;
     }
 

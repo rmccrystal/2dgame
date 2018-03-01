@@ -39,12 +39,14 @@ public class Player extends Entity {
             moveRight();
         }
     }
+/*
 
     @Override
     protected void updateYPos() {
         if(onGround) return;
         super.updateYPos();
     }
+*/
 
     private KeyHandler getKeyHandler() {
         return this.getWorld().getGame().getKeyHandler();

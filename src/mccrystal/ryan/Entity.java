@@ -29,6 +29,8 @@ public class Entity implements Renderable {
     protected boolean isVisible;
     protected boolean onGround;
 
+    protected Ground ground;
+
     protected World currentWorld;
 
     //protected Rectangle rectangle;
@@ -75,6 +77,7 @@ public class Entity implements Renderable {
         Ground ground = intersectsGround();
         positionY -= 1; //Move the object to it's original position
         onGround = ground != null;
+        this.ground = ground;
     }
 
     protected void updateYVeloity() {
@@ -85,9 +88,10 @@ public class Entity implements Renderable {
 
     protected void updateXVelocity() {
         positionX += velocityX;
-        if(intersectsGround() != null) {
-            Ground g = intersectsGround();
-            velocityX *= g.friction;
+        if(this.ground != null) {
+            velocityX *= this.ground.friction;
+        } else {
+            velocityX *= this.getWorld().getAirResistance();
         }
     }
 
@@ -96,6 +100,7 @@ public class Entity implements Renderable {
         if(intersectsGround() != null) {
             onGround = true;
             Ground g = intersectsGround();
+            this.ground = g;
             if(isMovingDirection(Direction.DOWN)) {
                 positionY = g.positionY - this.height;
                 velocityY = 0;
@@ -108,15 +113,19 @@ public class Entity implements Renderable {
     }
 
     protected void updateXPos() {
-        updateXVelocity();
         if(intersectsGround() != null) {
             Ground g = intersectsGround();
+            updateXVelocity();
             if(isMovingDirection(Direction.RIGHT)) {
                 positionX = g.positionX;
+                velocityX = 0;
 
             } else if(isMovingDirection(Direction.LEFT)) {
                 positionX = g.positionX + g.width;
+                velocityX = 0;
             }
+        } else {
+            updateXVelocity();
         }
     }
 

@@ -21,7 +21,7 @@ public class Game extends JPanel implements Runnable, Renderable {
 
     private KeyHandler keyHandler = new KeyHandler();
 
-    private World currentWorld = new World(this, true, 0.5f, Color.BLACK);
+    private World currentWorld = new World(this, true, 0.5f, 0.96f, Color.BLACK);
 
     public KeyHandler getKeyHandler() {
         return keyHandler;
@@ -55,8 +55,13 @@ public class Game extends JPanel implements Runnable, Renderable {
     public void run() {
         init();
         while(isRunning) {
+            mainLoop();
+        }
+    }
+
+    private void mainLoop() {
             long time = System.nanoTime();
-            long sleepAmount = 1000 / Game.TICKRATE;
+            long sleepAmount = getTickDelay();
             tick();
             renderAll();
             long msPassed = (System.nanoTime() - time)/1000000;
@@ -71,7 +76,11 @@ public class Game extends JPanel implements Runnable, Renderable {
 //            long renderTime = (System.nanoTime() - time)/1000000;
 //            System.out.println("Tick and render took " + renderTime + " ms. Should take " + totalSleepAmount + " ms.\n" +
 //            "Tick and render was " + Math.abs(renderTime - sleepAmount) + " ms off\n");
-        }
+    }
+
+    private int getTickDelay() {
+        long delay = 1000 / Game.TICKRATE;
+        return (int) delay;
     }
 
     private void init() {
@@ -80,7 +89,7 @@ public class Game extends JPanel implements Runnable, Renderable {
     }
 
     private void entityInit() {
-        float friciton = 0.9f;
+        float friciton = 0.8f;
         Entity player = new Player(500, 100, 100, 200);
         currentWorld.addEntity(player);//Create a new player object for testing
         currentWorld.addEntity(new Ground(0, 900, 2000, 60, friciton,  Color.GREEN));
