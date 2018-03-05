@@ -59,6 +59,16 @@ public class Entity implements Renderable {
     protected Ground intersectsGround() {
         for(Entity e : getWorld().getEntityList()) {
             if(e instanceof Ground) {
+            		/**
+            		 * Daniel:
+            		 * This approach makes sense and clearly works, but I think there's a lot of unnecessary overhead here.
+            		 * You can do this without instantiating objects.
+            		 * 
+            		 * But even if you want to keep this logic, there's still room for improvement to make it more readable.
+            		 * For example, you cast the entity to a ground object (because you know it is one).
+            		 * But then you don't use it until you return it at the end. Look in the instantiation of your
+            		 * groundArea object. Where can you use the Ground variable you already created? No need to recast something that you already cast.
+            		 */
                 Ground ground = (Ground) e;
                 Area a = new Area();
                 Area thisArea = new Area(new Rectangle((int) positionX, (int) positionY, (int) width, (int) height));
@@ -72,6 +82,15 @@ public class Entity implements Renderable {
         return null;
     }
 
+    
+    /**
+     * Daniel:
+     * I think this function is doing more work than you need to.
+     * Once you've determined that you're on the ground, you don't need to check again until the player jumps or moves off the edge.
+     * As it is right now, every frame, you're checking every single entity to see if it's on top of it.
+     * Once you figure out which entity the player is standing on, I would store that in a variable so you know where to look
+     * to determine if the player is still on the ground.
+     */
     protected void updateOnGround() { //Updates the variable onGround
         this.positionY += 1;                //Moves the object down one pixel and tests if it is in the ground
         Ground ground = intersectsGround();
@@ -79,7 +98,11 @@ public class Entity implements Renderable {
         onGround = ground != null;
         this.ground = ground;
     }
-
+    
+    /**
+     * Daniel:
+     * This method seems poorly named. It seems like you're updating the Y position here, not the velocity.
+     */
     protected void updateYVeloity() {
         if(velocityY >= terminalVelocity) velocityY = terminalVelocity; //Set speed limit
         positionY -= velocityY;
@@ -94,7 +117,16 @@ public class Entity implements Renderable {
             velocityX *= this.getWorld().getAirResistance();
         }
     }
-
+    
+    /**
+     * Daniel:
+     * Repeated work alert! Think about what's happening when you call intersectsGround. In the worst case,
+     * it has to look at every single entity in your scene. You're calling it to see if it is null,
+     * but then you call it again inside the if block to assign it to your g variable. This is not so noticeable
+     * when you only have a few entities in your scene, but you need to be more disciplined with your function calls
+     * if you want this to scale well. Consider calling it once, then setting that result to a variable, and then checking
+     * if that variable is null.
+     */
     protected void updateYPos() {
         updateYVeloity();
         if(intersectsGround() != null) {
@@ -145,7 +177,11 @@ public class Entity implements Renderable {
         }
         return false;
     }
-
+    
+    /**
+     * Daniel:
+     * This is another poorly named method. 
+     */
     protected void updateVelocity() {
         if(hasGravity && !onGround) {
             velocityY -= currentWorld.getGravitiy();
