@@ -105,12 +105,10 @@ public class Entity implements Renderable {
      */
     protected void updateYVeloity() {
         if(velocityY >= terminalVelocity) velocityY = terminalVelocity; //Set speed limit
-        positionY -= velocityY;
 
     }
 
     protected void updateXVelocity() {
-        positionX += velocityX;
         if(this.ground != null) {
             velocityX *= this.ground.friction;
         } else {
@@ -129,6 +127,7 @@ public class Entity implements Renderable {
      */
     protected void updateYPos() {
         updateYVeloity();
+        positionY -= velocityY;
         if(intersectsGround() != null) {
             onGround = true;
             Ground g = intersectsGround();
@@ -145,11 +144,13 @@ public class Entity implements Renderable {
     }
 
     protected void updateXPos() {
+        updateXVelocity();
+        positionX += velocityX;
         if(intersectsGround() != null) {
             Ground g = intersectsGround();
             updateXVelocity();
             if(isMovingDirection(Direction.RIGHT)) {
-                positionX = g.positionX;
+                positionX = g.positionX - this.width;
                 velocityX = 0;
 
             } else if(isMovingDirection(Direction.LEFT)) {
@@ -197,11 +198,13 @@ public class Entity implements Renderable {
     }
 
     public void render(Graphics2D graphics) {
-        graphics.setColor(Color.WHITE);
-        graphics.drawString(isMovingDirection(Direction.UP) ? "UP" : "", 300, 300);
-        graphics.drawString(isMovingDirection(Direction.DOWN) ? "DOWN" : "", 300, 350);
-        graphics.drawString(isMovingDirection(Direction.LEFT) ? "LEFT" : "", 300, 400);
-        graphics.drawString(isMovingDirection(Direction.RIGHT) ? "RIGHT" : "", 300, 450);
+        if(Game.DEBUG) {
+            graphics.setColor(Color.WHITE);
+            graphics.drawString(isMovingDirection(Direction.UP) ? "UP" : "", 300, 300);
+            graphics.drawString(isMovingDirection(Direction.DOWN) ? "DOWN" : "", 300, 350);
+            graphics.drawString(isMovingDirection(Direction.LEFT) ? "LEFT" : "", 300, 400);
+            graphics.drawString(isMovingDirection(Direction.RIGHT) ? "RIGHT" : "", 300, 450);
+        }
 
         graphics.setColor(color);
         graphics.fillRect((int) positionX, (int) positionY, (int) width, (int) height);
