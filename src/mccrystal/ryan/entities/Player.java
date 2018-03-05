@@ -10,7 +10,7 @@ public class Player extends Entity {
 
     protected int jumpFactor = 20;
     protected int moveSpeed = 10;
-    protected int acceleration = 1;
+    protected int acceleration = 5;
 
     protected boolean jumping = false;
 

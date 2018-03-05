@@ -9,6 +9,8 @@ import java.awt.*;
 public class Game extends JPanel implements Runnable, Renderable {
     private JFrame frm = new JFrame();
 
+    public static final boolean DEBUG = true;
+
     public static final int DEFAULT_WINDOW_LENGTH = 1920; //Default window height and length if no init value is given
     public static final int DEFAULT_WINDOW_HEIGHT = 1080;
     public static final String WINDOWTITLE = "Platformer";
@@ -21,7 +23,7 @@ public class Game extends JPanel implements Runnable, Renderable {
 
     private KeyHandler keyHandler = new KeyHandler();
 
-    private World currentWorld = new World(this, true, 0.5f, 0.96f, Color.BLACK);
+    private World currentWorld = new World(this, true, 0.5f, 0.99f, Color.BLACK);
 
     public KeyHandler getKeyHandler() {
         return keyHandler;
@@ -95,6 +97,7 @@ public class Game extends JPanel implements Runnable, Renderable {
         currentWorld.addEntity(new Ground(0, 900, 2000, 60, friciton,  Color.GREEN));
         currentWorld.addEntity(new Ground(1200, 700, 200, 20, friciton, Color.MAGENTA));
         currentWorld.addEntity(new Ground(600, 500, 200, 10, friciton, Color.YELLOW));
+        currentWorld.addEntity(new Ground(100, 800, 310, 5, friciton, Color.ORANGE));
     }
 
     private void tick() {
@@ -106,11 +109,13 @@ public class Game extends JPanel implements Runnable, Renderable {
         repaint();
     }
     public void render(Graphics2D g) {
-        int a = 50;
-        for(Integer i : getKeyHandler().getKeysDown()) {
-            g.setColor(Color.WHITE);
-            g.drawString(i.toString(), 100, a);
-            a+=10;
+        if(DEBUG) {
+            int a = 50;
+            for (Integer i : getKeyHandler().getKeysDown()) {
+                g.setColor(Color.WHITE);
+                g.drawString(i.toString(), 100, a);
+                a += 10;
+            }
         }
     }
     public synchronized void runGame() {
