@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="660c5e34-97b0-4471-bd07-bb319225d894" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/2dgame/mccrystal/ryan/Entity.class" afterPath="$PROJECT_DIR$/out/production/2dgame/mccrystal/ryan/Entity.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/2dgame/mccrystal/ryan/Game.class" afterPath="$PROJECT_DIR$/out/production/2dgame/mccrystal/ryan/Game.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/2dgame/mccrystal/ryan/World.class" afterPath="$PROJECT_DIR$/out/production/2dgame/mccrystal/ryan/World.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/2dgame/mccrystal/ryan/entities/Player.class" afterPath="$PROJECT_DIR$/out/production/2dgame/mccrystal/ryan/entities/Player.class" />
-      <change beforePath="$PROJECT_DIR$/src/mccrystal/ryan/Entity.java" afterPath="$PROJECT_DIR$/src/mccrystal/ryan/Entity.java" />
-      <change beforePath="$PROJECT_DIR$/src/mccrystal/ryan/Game.java" afterPath="$PROJECT_DIR$/src/mccrystal/ryan/Game.java" />
-      <change beforePath="$PROJECT_DIR$/src/mccrystal/ryan/World.java" afterPath="$PROJECT_DIR$/src/mccrystal/ryan/World.java" />
-      <change beforePath="$PROJECT_DIR$/src/mccrystal/ryan/entities/Player.java" afterPath="$PROJECT_DIR$/src/mccrystal/ryan/entities/Player.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -174,7 +165,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="23" />
+    <option name="x" value="-12" />
+    <option name="y" value="-11" />
     <option name="width" value="2048" />
     <option name="height" value="1083" />
   </component>
@@ -592,7 +584,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517373098170</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Fixed air and ground resistance.">
+      <created>1519948340191</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1519948340191</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -629,7 +628,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41425818" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41425818" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -675,7 +674,8 @@
     <MESSAGE value="Added isJumping for player" />
     <MESSAGE value="Fixed jumping and velocity." />
     <MESSAGE value="Started working on collision detection." />
-    <option name="LAST_COMMIT_MESSAGE" value="Started working on collision detection." />
+    <MESSAGE value="Fixed air and ground resistance." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed air and ground resistance." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
