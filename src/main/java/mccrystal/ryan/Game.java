@@ -6,7 +6,7 @@ import mccrystal.ryan.entities.Player;
 import javax.swing.*;
 import java.awt.*;
 
-public class Game extends JPanel implements Runnable, Renderable {
+public class Game extends JPanel implements Runnable, Renderable { //TODO: Make window resizable using FrameBuffers
     private JFrame frm = new JFrame();
 
     public static final boolean DEBUG = true;
@@ -18,6 +18,7 @@ public class Game extends JPanel implements Runnable, Renderable {
     public static final long TICKRATE = 60; //Should be 60
     public static int ticks = 0;
 
+    @SuppressWarnings
     private int windowLength = DEFAULT_WINDOW_LENGTH;
     private int windowHeight = DEFAULT_WINDOW_HEIGHT;
 

@@ -35,6 +35,14 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
 
     //protected Rectangle rectangle;
 
+    /** The Entity class can be anytning that appears on the screen.
+     * @param positionX inital X position of entity
+     * @param positionY inital Y position of entity
+     * @param width Width of the entity
+     * @param height Heigh tof the entity
+     * @param friciton Amount that will be multiplied to the speed on an entity that is moving on top of it. For example, friction of 0.9 will set velocity to 90% of its current velocity every tick.
+     * @param color Color of the object //TODO: add textures
+     */
     public Entity(float positionX, float positionY, float width, float height, float friction, Color color) {
         this.positionX = positionX;
         this.positionY = positionY;
@@ -43,7 +51,8 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
         this.friction = friction;
         this.color = color;
     }
-
+    
+    /** @return the current world the entity is in */
     public World getWorld() {
         return currentWorld;
     }
@@ -52,11 +61,15 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
         this.currentWorld = currentWorld;
     }
 
+    /** Runs every tick of the game as long as it is in an active world */
     public void tick() {
         updatePosition();
     }
 
-    protected Ground intersectsGround() {
+    /** Checks if the current entity is intersecting a ground object
+     * @return If the entity is intersecting a ground, it will return the ground object it is intersecting. If it is not intersecting a ground, it will return null
+     */
+    protected Ground intersectsGround() { //TODO: This code isn't necessary to run every tick
         for(Entity e : getWorld().getEntityList()) {
             if(e instanceof Ground) {
             		/**
@@ -98,17 +111,12 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
         this.ground = ground;
     }
     
-    /**
-     * Daniel:
-     * This method seems poorly named. It seems like you're updating the Y position here, not the velocity.
-     */
     protected void updateYVeloity() {
         if(velocityY >= terminalVelocity)
             velocityY = terminalVelocity; //Set speed limit
-
     }
 
-    protected void updateXVelocity() {
+    protected void updateXVelocity() { //Updaets X velocity based on the friction on the ground
         if(this.ground != null) {
             velocityX *= this.ground.friction;
         } else {
@@ -116,35 +124,28 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
         }
     }
     
-    /**
-     * Daniel:
-     * Repeated work alert! Think about what's happening when you call intersectsGround. In the worst case,
-     * it has to look at every single entity in your scene. You're calling it to see if it is null,
-     * but then you call it again inside the if block to assign it to your g variable. This is not so noticeable
-     * when you only have a few entities in your scene, but you need to be more disciplined with your function calls
-     * if you want this to scale well. Consider calling it once, then setting that result to a variable, and then checking
-     * if that variable is null.
-     */
     protected void updateYPos() {
         updateYVeloity();
         positionY -= velocityY;
-        if(intersectsGround() != null) {
+        Ground ground = intersectsGround();
+        if(ground != null) {
             onGround = true;
-            Ground g = intersectsGround();
-            this.ground = g;
+            this.ground = ground;
             if(isMovingDirection(Direction.DOWN)) {
-                positionY = g.positionY - this.height;
+                positionY = ground.positionY - this.height;
                 velocityY = 0;
             } else if (isMovingDirection(Direction.UP)){
-                positionY = g.positionY + g.height;
+                positionY = ground.positionY + ground.height;
                 onGround = false;
                 velocityY = 0;
             }
         }
     }
 
-    protected void updateXPos() {
-        updateXVelocity();
+    protected void updateXPos() { //FIXME: Collision doesn't work while moing right or jumping and moving left
+        if(hasGravity && !onGround) {
+            velocityY -= currentWorld.getGravitiy(); //Gravity
+        }
         positionX += velocityX;
         if(intersectsGround() != null) {
             Ground g = intersectsGround();
@@ -163,6 +164,11 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
     }
 
     public enum Direction {UP, DOWN, LEFT, RIGHT}
+    /**
+     * isMovingDirection will return true if the player is moving the specified direction and false if it is not.
+     * @param d This is the direciton that will be checked
+     * @return boolean This returns if the player is moving that direction specified
+     */
     public boolean isMovingDirection(Direction d) {
         if(velocityY > 0) {
             if(d == Direction.UP) return true;
@@ -178,23 +184,12 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
         }
         return false;
     }
-    
-    /**
-     * Daniel:
-     * This is another poorly named method. 
-     */
-    protected void updateVelocity() {
-        if(hasGravity && !onGround) {
-            velocityY -= currentWorld.getGravitiy();
-        }
-    }
 
     public void updatePosition() {
         if(!canMove) return;
         updateXPos();
         updateYPos();
         updateOnGround();
-        updateVelocity();
     }
 
     public void render(Graphics2D graphics) {
