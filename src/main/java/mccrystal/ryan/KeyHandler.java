@@ -8,18 +8,15 @@ import java.util.Collections;
 public class KeyHandler implements KeyListener {
     private ArrayList<Integer> keysDown = new ArrayList<Integer>();
 
-    @Override
     public void keyTyped(KeyEvent e) {
-
+        
     }
 
-    @Override
     public void keyPressed(KeyEvent e) {
         if(keysDown.contains(e.getKeyCode())) return;
         keysDown.add(e.getKeyCode());
     }
 
-    @Override
     public void keyReleased(KeyEvent e) {
         keysDown.removeAll(Collections.singleton(e.getKeyCode()));
     }
