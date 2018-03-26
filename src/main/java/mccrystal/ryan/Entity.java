@@ -200,9 +200,6 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
             graphics.drawString(isMovingDirection(Direction.LEFT) ? "LEFT" : "", 300, 400);
             graphics.drawString(isMovingDirection(Direction.RIGHT) ? "RIGHT" : "", 300, 450);
         }
-
-        graphics.setColor(color);
-        graphics.fillRect((int) positionX, (int) positionY, (int) width, (int) height);
     }
 
 

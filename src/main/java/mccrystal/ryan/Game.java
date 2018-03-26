@@ -2,6 +2,7 @@ package mccrystal.ryan;
 
 import mccrystal.ryan.entities.Ground;
 import mccrystal.ryan.entities.Player;
+import mccrystal.ryan.worlds.TestLevel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,13 +19,12 @@ public class Game extends JPanel implements Runnable, Renderable { //TODO: Make 
     public static final long TICKRATE = 60; //Should be 60
     public static int ticks = 0;
 
-    @SuppressWarnings
     private int windowLength = DEFAULT_WINDOW_LENGTH;
     private int windowHeight = DEFAULT_WINDOW_HEIGHT;
 
     private KeyHandler keyHandler = new KeyHandler();
 
-    private World currentWorld = new World(this, true, 0.5f, 0.99f, Color.BLACK);
+    private World currentWorld = new TestLevel(this, true);
 
     public KeyHandler getKeyHandler() {
         return keyHandler;
@@ -55,13 +55,14 @@ public class Game extends JPanel implements Runnable, Renderable { //TODO: Make 
         this.render(g2d);
     }
 
+    /** This runs when the game starts */
     public void run() {
-        init();
+        init(); //Initalize the game
         while(isRunning) {
-            mainLoop();
+            mainLoop(); //Keep on running the main loop
         }
     }
-
+    /** Main loop of the Game. Handles the ticks rate */
     private void mainLoop() {
             long time = System.nanoTime();
             long sleepAmount = getTickDelay();
@@ -90,6 +91,7 @@ public class Game extends JPanel implements Runnable, Renderable { //TODO: Make 
         entityInit();
         addKeyListener(getKeyHandler());
     }
+
 
     private void entityInit() {
         float friciton = 0.8f;

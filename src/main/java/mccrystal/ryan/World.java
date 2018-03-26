@@ -3,8 +3,13 @@ package mccrystal.ryan;
 import java.awt.*;
 import java.util.LinkedList;
 
+import mccrystal.ryan.entities.Player;
+
 public class World {
     private boolean isActive;
+
+    private int cameraX;
+    private int cameraY;
 
     private LinkedList<Entity> entityList = new LinkedList<Entity>();
 
@@ -61,13 +66,19 @@ public class World {
     public void render(Graphics2D g) {
         g.setColor(backgroundColor);
         g.fillRect(0, 0, Game.DEFAULT_WINDOW_LENGTH, Game.DEFAULT_WINDOW_HEIGHT);
-        for (Renderable e : getEntityList()) {
-            e.render(g);
+        for (Entity e : getEntityList()) {
+            g.setColor(e.color);
+            g.fillRect(-cameraX + Game.DEFAULT_WINDOW_LENGTH/2 + ((int) e.positionX), -cameraY/2 + (((int) e.positionY)), (int) e.width, (int) e.height); //Camera view
         }
     }
     public void tick() {
         for(Entity e : getEntityList()) {
             e.tick();
+            if(e instanceof Player) {
+                Player p = (Player) e;
+                this.cameraX = (int) e.positionX;
+                this.cameraY = (int) e.positionY;
+            }
         }
     }
 }
