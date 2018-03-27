@@ -1,11 +1,17 @@
 package mccrystal.ryan;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Toolkit;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import mccrystal.ryan.entities.Ground;
 import mccrystal.ryan.entities.Player;
 import mccrystal.ryan.worlds.TestLevel;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class Game extends JPanel implements Runnable, Renderable { //TODO: Make window resizable using FrameBuffers
     private JFrame frm = new JFrame();
@@ -147,5 +153,11 @@ public class Game extends JPanel implements Runnable, Renderable { //TODO: Make 
     public synchronized void stopGame() {
         isRunning = false;
         this.thread.interrupt();
+    }
+
+    public static void debugPrint(Object text) {
+        if(Game.DEBUG) {
+            System.out.println(text);
+        }
     }
 }

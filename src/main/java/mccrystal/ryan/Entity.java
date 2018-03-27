@@ -63,6 +63,7 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
 
     /** Runs every tick of the game as long as it is in an active world */
     public void tick() {
+        runEvents();
         updatePosition();
     }
 
@@ -163,6 +164,26 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
         }
     }
 
+    protected void runEvents() {
+        runOnIntsersectGround();
+    }
+
+    protected void runOnIntsersectGround() {
+        Ground g = intersectsGround();
+        if(g !=null) {
+            onIntersectGround(g);
+        }
+    }
+
+    /////////////////////////////////////////EVENTS//////////////////////////////////////////
+    /**
+     * This code runs whenever the entity collides with another entity
+     */
+    protected void onIntersectGround(Ground e) {
+        if(!canMove) return;
+        Game.debugPrint("Collided with the ground");
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////
     public enum Direction {UP, DOWN, LEFT, RIGHT}
     /**
      * isMovingDirection will return true if the player is moving the specified direction and false if it is not.
@@ -193,13 +214,7 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
     }
 
     public void render(Graphics2D graphics) {
-        if(Game.DEBUG) {
-            graphics.setColor(Color.WHITE);
-            graphics.drawString(isMovingDirection(Direction.UP) ? "UP" : "", 300, 300);
-            graphics.drawString(isMovingDirection(Direction.DOWN) ? "DOWN" : "", 300, 350);
-            graphics.drawString(isMovingDirection(Direction.LEFT) ? "LEFT" : "", 300, 400);
-            graphics.drawString(isMovingDirection(Direction.RIGHT) ? "RIGHT" : "", 300, 450);
-        }
+
     }
 
 
