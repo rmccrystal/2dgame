@@ -11,26 +11,8 @@
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopOnEntry": false,
-            "mainClass": "",
+            "mainClass": "mccrystal.ryan",
             "args": ""
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-Main<2dgame>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
-            "stopOnEntry": false,
-            "mainClass": "mccrystal.ryan.Main",
-            "projectName": "2dgame",
-            "args": ""
-        },
-        {
-            "type": "java",
-            "name": "Debug (Attach)",
-            "request": "attach",
-            "hostName": "localhost",
-            "port": 0
         }
     ]
 }
