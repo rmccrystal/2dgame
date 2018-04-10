@@ -8,9 +8,9 @@ import java.awt.event.KeyEvent;
 
 public class Player extends Entity {
 
-    protected int jumpFactor = 20;
-    protected int moveSpeed = 10;
-    protected int acceleration = 5;
+    protected float jumpFactor = 20;
+    protected float moveSpeed = 7;
+    protected float acceleration = 3;
 
     protected boolean jumping = false;
 
@@ -25,6 +25,11 @@ public class Player extends Entity {
     @Override
     public void tick() {
         handleKeys();
+        if(onGround) {
+            acceleration = 3;
+        } else {
+            acceleration = 0.2f;
+        }
         super.tick();
     }
     /** handleKeys checks if keys are pressed and does the appropriate action */

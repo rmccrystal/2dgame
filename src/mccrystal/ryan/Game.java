@@ -20,6 +20,8 @@ public class Game extends JPanel implements Runnable, Renderable { //TODO: Make 
         return renderManager;
     }
 
+    public Player player = new Player(500, 100, 100, 200);
+
     public RenderManager renderManager = new RenderManager(1f, this);
 
     public static final boolean DEBUG = true;
@@ -106,13 +108,7 @@ public class Game extends JPanel implements Runnable, Renderable { //TODO: Make 
 
 
     private void entityInit() {
-        float friciton = 0.8f;
-        Entity player = new Player(500, 100, 100, 200);
         currentWorld.addEntity(player);//Create a new player object for testing
-        currentWorld.addEntity(new Ground(0, 900, 2000, 60, friciton,  Color.GREEN));
-        currentWorld.addEntity(new Ground(1200, 700, 200, 20, friciton, Color.MAGENTA));
-        currentWorld.addEntity(new Ground(600, 500, 200, 10, friciton, Color.YELLOW));
-        currentWorld.addEntity(new Ground(100, 800, 310, 5, friciton, Color.ORANGE));
     }
 
     private void tick() {
