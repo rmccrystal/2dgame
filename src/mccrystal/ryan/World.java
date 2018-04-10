@@ -55,6 +55,10 @@ public class World {
         this.gravitiy = gravitiy;
     }
 
+    public RenderManager getRenderManager() {
+        return getGame().getRenderManager();
+    }
+
     public World(Game g, boolean isActive, float gravitiy, float airResistance, Color backgroundColor) {
         this.isActive = isActive;
         this.gravitiy = gravitiy;
@@ -64,11 +68,16 @@ public class World {
     }
 
     public void render(Graphics2D g) {
-        g.setColor(backgroundColor);
-        g.fillRect(0, 0, Game.DEFAULT_WINDOW_LENGTH, Game.DEFAULT_WINDOW_HEIGHT);
+        getRenderManager().fillBackgroundColor(this.backgroundColor, g);
         for (Entity e : getEntityList()) {
             g.setColor(e.color);
-            g.fillRect(-cameraX + Game.DEFAULT_WINDOW_LENGTH/2 + ((int) e.positionX), -cameraY/2 + (((int) e.positionY)), (int) e.width, (int) e.height); //Camera view
+
+            g.fillRoundRect(
+                    -cameraX + getGame().frm.getWidth()/2 + ((int) e.positionX),
+                    -cameraY + getGame().frm.getHeight()/2 + (((int) e.positionY)),
+                    (int) e.width,
+                    (int) e.height,
+                    4, 4); //Camera view
         }
     }
     public void tick() {
@@ -76,8 +85,8 @@ public class World {
             e.tick();
             if(e instanceof Player) {
                 Player p = (Player) e;
-                this.cameraX = (int) e.positionX;
-                this.cameraY = (int) e.positionY;
+                this.cameraX = (int) e.positionX + (int) e.width/2;
+                this.cameraY = (int) e.positionY + (int) e.height/2;
             }
         }
     }

@@ -181,7 +181,7 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
      */
     protected void onIntersectGround(Ground e) {
         if(!canMove) return;
-        Game.debugPrint("Collided with the ground");
+        //Game.debugPrint("Collided with the ground");
     }
     /////////////////////////////////////////////////////////////////////////////////////////
     public enum Direction {UP, DOWN, LEFT, RIGHT}
@@ -200,7 +200,7 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
         if(velocityX < 0) {
             if(d == Direction.LEFT) return true;
         }
-        if(velocityY > 0) {
+        if(velocityX > 0) {
             if(d == Direction.RIGHT) return true;
         }
         return false;

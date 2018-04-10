@@ -14,7 +14,13 @@ import mccrystal.ryan.entities.Player;
 import mccrystal.ryan.worlds.TestLevel;
 
 public class Game extends JPanel implements Runnable, Renderable { //TODO: Make window resizable using FrameBuffers
-    private JFrame frm = new JFrame();
+    public JFrame frm = new JFrame();
+
+    public RenderManager getRenderManager() {
+        return renderManager;
+    }
+
+    public RenderManager renderManager = new RenderManager(1f, this);
 
     public static final boolean DEBUG = true;
 
