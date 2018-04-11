@@ -70,14 +70,8 @@ public class World {
     public void render(Graphics2D g) {
         getRenderManager().fillBackgroundColor(this.backgroundColor, g);
         for (Entity e : getEntityList()) {
-            g.setColor(e.color);
 
-            g.fillRoundRect(
-                    -cameraX + getGame().frm.getWidth()/2 + ((int) e.positionX),
-                    -cameraY + getGame().frm.getHeight()/2 + (((int) e.positionY)),
-                    (int) e.width,
-                    (int) e.height,
-                    4, 4); //Camera view
+            getRenderManager().fillRectWithCamera(e.positionX, e.positionY, e.width, e.height, cameraX, cameraY, e.color, g);
         }
     }
     public void tick() {
