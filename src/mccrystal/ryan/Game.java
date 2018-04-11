@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,7 +15,7 @@ import mccrystal.ryan.entities.Ground;
 import mccrystal.ryan.entities.Player;
 import mccrystal.ryan.worlds.TestLevel;
 
-public class Game extends JPanel implements Runnable, Renderable { //TODO: Make window resizable using FrameBuffers
+public class Game extends JPanel implements Runnable, Renderable, KeyListener { //TODO: Make window resizable using FrameBuffers
     public JFrame frm = new JFrame();
 
     public RenderManager getRenderManager() {
@@ -161,5 +163,22 @@ public class Game extends JPanel implements Runnable, Renderable { //TODO: Make 
         if(Game.DEBUG) {
             System.out.println(text);
         }
+    }
+
+    //Key Events for zooming
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == 61) getRenderManager().setScale(getRenderManager().getScale()+0.05f); //+ key
+        if(e.getKeyCode() == 45) getRenderManager().setScale(getRenderManager().getScale()-0.05f); //- key
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
     }
 }

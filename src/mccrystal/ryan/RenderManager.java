@@ -3,7 +3,14 @@ package mccrystal.ryan;
 import java.awt.*;
 
 public class RenderManager {
-    float scale = 1f;
+    public float getScale() {
+        return scale;
+    }
+    public void setScale(float scale) {
+        this.scale = scale;
+    }
+
+    private float scale = 1f;
 
     Game game;
     public RenderManager(float scale, Game game) {
@@ -23,9 +30,15 @@ public class RenderManager {
         int centerOfFrameX = getGame().frm.getWidth()/2; //Get the center of the frame using the getHeight and getWidth method
         int centerOfFrameY = getGame().frm.getHeight()/2;
         g.setColor(color);
+        width *= scale;
+        height *= scale;
+        cameraX *= scale;
+        cameraY *= scale;
+        x *= scale;
+        y *= scale;
         g.fillRect(
-                -cameraX + centerOfFrameX + x,
-                -cameraY + centerOfFrameY + y,
+                (int) (-cameraX + (centerOfFrameX + x)),
+                (int) (-cameraY + (centerOfFrameY + y)),
                 width,
                 height
         );
