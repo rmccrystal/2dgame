@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -62,6 +64,17 @@ public class Game extends JPanel implements Runnable { //TODO: Make window resiz
         frm.pack();
         frm.setVisible(true);
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frm.addComponentListener(new ResizeListener());
+    }
+
+    class ResizeListener extends ComponentAdapter {
+        public void componentResized(ComponentEvent e) { //Runs when the window is resized
+            float frameHeight = frm.getHeight();
+            float frameDefaultHeight = DEFAULT_WINDOW_HEIGHT;
+            float newScale = frameHeight / frameDefaultHeight;
+            getRenderManager().setScale(newScale);
+            Game.debugPrint("Changed the scale to " + newScale);
+        }
     }
 
     @Override
@@ -109,7 +122,7 @@ public class Game extends JPanel implements Runnable { //TODO: Make window resiz
         zoomKeysInit();
     }
 
-    private void zoomKeysInit() {
+    private void zoomKeysInit() { //Adds the keyhandler entries for the keys to zoom in and out
         float zoomAmount = 0.2f;
         getKeyHandler().addEvent(61, () -> {
             getRenderManager().setScale(getRenderManager().getScale()+zoomAmount); //+ key
