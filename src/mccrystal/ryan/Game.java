@@ -15,7 +15,7 @@ import mccrystal.ryan.entities.Ground;
 import mccrystal.ryan.entities.Player;
 import mccrystal.ryan.worlds.TestLevel;
 
-public class Game extends JPanel implements Runnable, Renderable, KeyListener { //TODO: Make window resizable using FrameBuffers
+public class Game extends JPanel implements Runnable { //TODO: Make window resizable using FrameBuffers
     public JFrame frm = new JFrame();
 
     public RenderManager getRenderManager() {
@@ -106,8 +106,18 @@ public class Game extends JPanel implements Runnable, Renderable, KeyListener { 
     private void init() {
         entityInit();
         addKeyListener(getKeyHandler());
+        zoomKeysInit();
     }
 
+    private void zoomKeysInit() {
+        float zoomAmount = 0.2f;
+        getKeyHandler().addEvent(61, () -> {
+            getRenderManager().setScale(getRenderManager().getScale()+zoomAmount); //+ key
+        });
+        getKeyHandler().addEvent(45, () -> {
+            getRenderManager().setScale(getRenderManager().getScale()-zoomAmount); //- key
+        });
+    }
 
     private void entityInit() {
         currentWorld.addEntity(player);//Create a new player object for testing
@@ -163,22 +173,5 @@ public class Game extends JPanel implements Runnable, Renderable, KeyListener { 
         if(Game.DEBUG) {
             System.out.println(text);
         }
-    }
-
-    //Key Events for zooming
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == 61) getRenderManager().setScale(getRenderManager().getScale()+0.05f); //+ key
-        if(e.getKeyCode() == 45) getRenderManager().setScale(getRenderManager().getScale()-0.05f); //- key
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
     }
 }
