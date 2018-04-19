@@ -3,6 +3,7 @@ package mccrystal.ryan;
 import java.awt.*;
 import java.util.LinkedList;
 
+import mccrystal.ryan.entities.Enemy;
 import mccrystal.ryan.entities.Player;
 
 public class World {
@@ -70,7 +71,6 @@ public class World {
     public void render(Graphics2D g) {
         getRenderManager().fillBackgroundColor(this.backgroundColor, g);
         for (Entity e : getEntityList()) {
-
             getRenderManager().fillRectWithCamera(e.positionX, e.positionY, e.width, e.height, cameraX, cameraY, e.color, g);
         }
     }

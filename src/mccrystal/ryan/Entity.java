@@ -5,7 +5,7 @@ import mccrystal.ryan.entities.Ground;
 import java.awt.*;
 import java.awt.geom.Area;
 
-public class Entity implements Renderable { //TODO: Make renderable interface work
+public class Entity {
     protected float positionX; //Position of entity
     protected float positionY;
 
@@ -222,9 +222,7 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
         updateOnGround();
     }
 
-    public void render(Graphics2D graphics) {
 
-    }
 
 
 }

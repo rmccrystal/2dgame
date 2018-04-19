@@ -8,9 +8,22 @@ public class RenderManager {
     }
     public void setScale(float scale) {
         this.scale = scale;
+        if(scale > 500) {
+            assert false;
+        }
     }
 
     private float scale = 1f;
+
+    public float getZoomModifier() {
+        return zoomModifier;
+    }
+
+    public void setZoomModifier(float zoomModifier) {
+        this.zoomModifier = zoomModifier;
+    }
+
+    private float zoomModifier = 1f; //Modifier for the scale changed when the plus and minus keys are pressed
 
     Game game;
     public RenderManager(float scale, Game game) {
@@ -30,12 +43,14 @@ public class RenderManager {
         int centerOfFrameX = getGame().frm.getWidth()/2; //Get the center of the frame using the getHeight and getWidth method
         int centerOfFrameY = getGame().frm.getHeight()/2;
         g.setColor(color);
-        width *= scale;
-        height *= scale;
-        cameraX *= scale;
-        cameraY *= scale;
-        x *= scale;
-        y *= scale;
+        float finalScale = scale; //The final scale to use after multiplying zoomModifier
+        finalScale *= zoomModifier;
+        width *= finalScale;
+        height *= finalScale;
+        cameraX *= finalScale;
+        cameraY *= finalScale;
+        x *= finalScale;
+        y *= finalScale;
         g.fillRect(
                 (int) (-cameraX + (centerOfFrameX + x)),
                 (int) (-cameraY + (centerOfFrameY + y)),
@@ -50,7 +65,7 @@ public class RenderManager {
     }
 
 
-        protected Game getGame() {
+    protected Game getGame() {
         return game;
     }
 }

@@ -123,12 +123,12 @@ public class Game extends JPanel implements Runnable { //TODO: Make window resiz
     }
 
     private void zoomKeysInit() { //Adds the keyhandler entries for the keys to zoom in and out
-        float zoomAmount = 0.2f;
+        float zoomAmount = .2f;
         getKeyHandler().addEvent(61, () -> {
-            getRenderManager().setScale(getRenderManager().getScale()+zoomAmount); //+ key
+            getRenderManager().setZoomModifier(getRenderManager().getZoomModifier()+zoomAmount); //+ key
         });
         getKeyHandler().addEvent(45, () -> {
-            getRenderManager().setScale(getRenderManager().getScale()-zoomAmount); //- key
+            getRenderManager().setZoomModifier(getRenderManager().getZoomModifier()-zoomAmount); //- key
         });
     }
 

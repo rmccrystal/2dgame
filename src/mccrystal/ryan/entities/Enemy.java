@@ -6,8 +6,8 @@ import java.awt.*;
 
 public class Enemy extends Entity {
     protected int jumpFactor = 20;
-    protected int moveSpeed = 10;
-    protected int acceleration = 5;
+    protected int moveSpeed = 6;
+    protected int acceleration = 2;
 
     protected boolean jumping = false;
 
@@ -16,6 +16,8 @@ public class Enemy extends Entity {
     public Enemy(float positionX, float positionY, float width, float height, Player player) {
         super(positionX, positionY, width, height, 1, Color.RED);
         this.player = player;
+        this.canMove = true;
+        this.hasGravity = true;
     }
 
     @Override
@@ -27,6 +29,9 @@ public class Enemy extends Entity {
         }
         if(positionX > player.getPositionX()) {
             moveLeft();
+        }
+        if(positionY - 400 > player.getPositionY()) {
+            jump();
         }
     }
 
