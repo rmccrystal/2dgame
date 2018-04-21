@@ -6,8 +6,8 @@ import java.awt.*;
 
 public class Enemy extends Entity {
     protected int jumpFactor = 20;
-    protected int moveSpeed = 6;
-    protected int acceleration = 2;
+    protected float moveSpeed = 6;
+    protected float acceleration = 0.5f;
 
     protected boolean jumping = false;
 

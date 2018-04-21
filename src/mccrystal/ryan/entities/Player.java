@@ -31,6 +31,14 @@ public class Player extends Entity {
             acceleration = 0.2f;
         }
         super.tick();
+        if(positionY > 2500) {
+            fallFromGround();
+        }
+    }
+
+    protected void fallFromGround() {
+        positionY = 0;
+        positionX = 0;
     }
     /** handleKeys checks if keys are pressed and does the appropriate action */
     protected void handleKeys() {

@@ -1,6 +1,7 @@
 package mccrystal.ryan;
 
 import java.awt.*;
+import java.io.OutputStream;
 import java.util.LinkedList;
 
 import mccrystal.ryan.entities.Enemy;
@@ -83,5 +84,6 @@ public class World {
                 this.cameraY = (int) e.positionY + (int) e.height/2;
             }
         }
+
     }
 }
