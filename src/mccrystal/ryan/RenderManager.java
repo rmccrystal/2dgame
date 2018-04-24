@@ -32,6 +32,7 @@ public class RenderManager {
     }
 
     public void fillBackgroundColor(Color color, Graphics2D g) {
+        g.setColor(color);
         g.fillRect(0, 0, getGame().frm.getWidth(), getGame().frm.getHeight());
     }
 

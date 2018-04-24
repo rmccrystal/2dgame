@@ -15,7 +15,7 @@ public class Player extends Entity {
     protected boolean jumping = false;
 
     public Player(float positionX, float positionY, float width, float height) {
-        super(positionX, positionY, width, height, 1, Color.CYAN);
+        super(positionX, positionY, width, height, 1, new Color(0, 100, 255));
         canMove = true;
         hasGravity = true;
         hasCollision = true;
