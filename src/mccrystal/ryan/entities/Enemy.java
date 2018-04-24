@@ -11,6 +11,8 @@ public class Enemy extends Entity {
 
     protected boolean jumping = false;
 
+    protected boolean canForceJump = false;
+
     protected Player player;
 
     public Enemy(float positionX, float positionY, float width, float height, Player player) {
@@ -23,7 +25,9 @@ public class Enemy extends Entity {
     @Override
     public void tick() {
         super.tick();
-
+        if(onGround) {
+            jumping = false;
+        }
         if(positionX < player.getPositionX()) {
             moveRight();
         }
@@ -33,6 +37,20 @@ public class Enemy extends Entity {
         if(positionY - 400 > player.getPositionY()) {
             jump();
         }
+        if(onGround == false && canForceJump) {
+            canForceJump = false;
+            forceJump();
+        }
+        if(onGround) canForceJump = true; //This code makes the enemy jump when it reaches an edge
+        restartPositionIfNeeded();
+
+    }
+
+    private void restartPositionIfNeeded() {
+        if(positionY > 2500) {
+            positionX = 0;
+            positionY = 0;
+        }
     }
 
     private void jump() {
@@ -40,6 +58,10 @@ public class Enemy extends Entity {
         this.velocityY = jumpFactor;
         onGround = false;
         jumping = true;
+    }
+
+    private void forceJump() {
+        this.velocityY = jumpFactor;
     }
 
     private void moveLeft() {

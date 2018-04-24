@@ -8,7 +8,7 @@ import mccrystal.ryan.entities.Ground;
 import mccrystal.ryan.entities.Player;
 
 public class TestLevel extends World {
-    public TestLevel(Game game, boolean active) {
+    public TestLevel( Game game, boolean active) {
         super(game, active, 0.5f, 0.99f, new Color(135, 206, 235));
         float friciton = 0.8f;
         this.addEntity(new Ground(0, 900, 600, 60, friciton,  Color.BLACK));
