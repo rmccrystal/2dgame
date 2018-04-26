@@ -6,6 +6,15 @@ import java.awt.*;
 
 public class Enemy extends Entity {
     protected int jumpFactor = 20;
+
+    public float getMoveSpeed() {
+        return moveSpeed;
+    }
+
+    public void setMoveSpeed(float moveSpeed) {
+        this.moveSpeed = moveSpeed;
+    }
+
     protected float moveSpeed = 6;
     protected float acceleration = 0.5f;
 

@@ -80,10 +80,14 @@ public class World {
             e.tick();
             if(e instanceof Player) {
                 Player p = (Player) e;
-                this.cameraX = (int) e.positionX + (int) e.width/2;
-                this.cameraY = (int) e.positionY + (int) e.height/2;
+                updateCameraPosition(p);
             }
         }
+
+    }
+    public void updateCameraPosition(Player p) {
+        this.cameraX = (int) p.positionX + (int) p.width/2; //TODO: Make this only change camera when the player is at the edge of the screen
+        this.cameraY = (int) p.positionY + (int) p.height/2;
 
     }
 }
