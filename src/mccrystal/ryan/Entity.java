@@ -5,7 +5,7 @@ import mccrystal.ryan.entities.Ground;
 import java.awt.*;
 import java.awt.geom.Area;
 
-public class Entity implements Renderable { //TODO: Make renderable interface work
+public class Entity {
     protected float positionX; //Position of entity
     protected float positionY;
 
@@ -34,6 +34,14 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
     protected World currentWorld;
 
     //protected Rectangle rectangle;
+
+    public float getPositionX() {
+        return positionX;
+    }
+
+    public float getPositionY() {
+        return positionY;
+    }
 
     /** The Entity class can be anytning that appears on the screen.
      * @param positionX inital X position of entity
@@ -113,6 +121,9 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
     }
     
     protected void updateYVeloity() {
+        if(hasGravity && !onGround) {
+            velocityY -= currentWorld.getGravitiy(); //Gravity
+        }
         if(velocityY >= terminalVelocity)
             velocityY = terminalVelocity; //Set speed limit
     }
@@ -143,10 +154,8 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
         }
     }
 
-    protected void updateXPos() { //FIXME: Collision doesn't work while moing right or jumping and moving left
-        if(hasGravity && !onGround) {
-            velocityY -= currentWorld.getGravitiy(); //Gravity
-        }
+    protected void updateXPos() {
+
         positionX += velocityX;
         if(intersectsGround() != null) {
             Ground g = intersectsGround();
@@ -213,9 +222,7 @@ public class Entity implements Renderable { //TODO: Make renderable interface wo
         updateOnGround();
     }
 
-    public void render(Graphics2D graphics) {
 
-    }
 
 
 }

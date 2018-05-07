@@ -1,8 +1,10 @@
 package mccrystal.ryan;
 
 import java.awt.*;
+import java.io.OutputStream;
 import java.util.LinkedList;
 
+import mccrystal.ryan.entities.Enemy;
 import mccrystal.ryan.entities.Player;
 
 public class World {
@@ -70,14 +72,7 @@ public class World {
     public void render(Graphics2D g) {
         getRenderManager().fillBackgroundColor(this.backgroundColor, g);
         for (Entity e : getEntityList()) {
-            g.setColor(e.color);
-
-            g.fillRoundRect(
-                    -cameraX + getGame().frm.getWidth()/2 + ((int) e.positionX),
-                    -cameraY + getGame().frm.getHeight()/2 + (((int) e.positionY)),
-                    (int) e.width,
-                    (int) e.height,
-                    4, 4); //Camera view
+            getRenderManager().fillRectWithCamera(e.positionX, e.positionY, e.width, e.height, cameraX, cameraY, e.color, g);
         }
     }
     public void tick() {
@@ -85,9 +80,14 @@ public class World {
             e.tick();
             if(e instanceof Player) {
                 Player p = (Player) e;
-                this.cameraX = (int) e.positionX + (int) e.width/2;
-                this.cameraY = (int) e.positionY + (int) e.height/2;
+                updateCameraPosition(p);
             }
         }
+
+    }
+    public void updateCameraPosition(Player p) {
+        this.cameraX = (int) p.positionX + (int) p.width/2; //TODO: Make this only change camera when the player is at the edge of the screen
+        this.cameraY = (int) p.positionY + (int) p.height/2;
+
     }
 }

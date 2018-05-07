@@ -5,6 +5,10 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,12 +17,14 @@ import mccrystal.ryan.entities.Ground;
 import mccrystal.ryan.entities.Player;
 import mccrystal.ryan.worlds.TestLevel;
 
-public class Game extends JPanel implements Runnable, Renderable { //TODO: Make window resizable using FrameBuffers
+public class Game extends JPanel implements Runnable { //TODO: Make window resizable using FrameBuffers
     public JFrame frm = new JFrame();
 
     public RenderManager getRenderManager() {
         return renderManager;
     }
+
+    public Player player = new Player(500, 100, 100, 200);
 
     public RenderManager renderManager = new RenderManager(1f, this);
 
@@ -58,6 +64,17 @@ public class Game extends JPanel implements Runnable, Renderable { //TODO: Make 
         frm.pack();
         frm.setVisible(true);
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frm.addComponentListener(new ResizeListener());
+    }
+
+    class ResizeListener extends ComponentAdapter {
+        public void componentResized(ComponentEvent e) { //Runs when the window is resized
+            float frameHeight = frm.getHeight();
+            float frameDefaultHeight = DEFAULT_WINDOW_HEIGHT;
+            float newScale = frameHeight / frameDefaultHeight;
+            getRenderManager().setScale(newScale);
+            Game.debugPrint("Changed the scale to " + newScale);
+        }
     }
 
     @Override
@@ -102,17 +119,21 @@ public class Game extends JPanel implements Runnable, Renderable { //TODO: Make 
     private void init() {
         entityInit();
         addKeyListener(getKeyHandler());
+        zoomKeysInit();
     }
 
+    private void zoomKeysInit() { //Adds the keyhandler entries for the keys to zoom in and out
+        float zoomAmount = .2f;
+        getKeyHandler().addEvent(61, () -> {
+            getRenderManager().setZoomModifier(getRenderManager().getZoomModifier()+zoomAmount); //+ key
+        });
+        getKeyHandler().addEvent(45, () -> {
+            getRenderManager().setZoomModifier(getRenderManager().getZoomModifier()-zoomAmount); //- key
+        });
+    }
 
     private void entityInit() {
-        float friciton = 0.8f;
-        Entity player = new Player(500, 100, 100, 200);
         currentWorld.addEntity(player);//Create a new player object for testing
-        currentWorld.addEntity(new Ground(0, 900, 2000, 60, friciton,  Color.GREEN));
-        currentWorld.addEntity(new Ground(1200, 700, 200, 20, friciton, Color.MAGENTA));
-        currentWorld.addEntity(new Ground(600, 500, 200, 10, friciton, Color.YELLOW));
-        currentWorld.addEntity(new Ground(100, 800, 310, 5, friciton, Color.ORANGE));
     }
 
     private void tick() {

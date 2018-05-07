@@ -8,14 +8,14 @@ import java.awt.event.KeyEvent;
 
 public class Player extends Entity {
 
-    protected int jumpFactor = 20;
-    protected int moveSpeed = 10;
-    protected int acceleration = 5;
+    protected float jumpFactor = 20;
+    protected float moveSpeed = 7;
+    protected float acceleration = 3;
 
     protected boolean jumping = false;
 
     public Player(float positionX, float positionY, float width, float height) {
-        super(positionX, positionY, width, height, 1, Color.CYAN);
+        super(positionX, positionY, width, height, 1, new Color(0, 100, 255));
         canMove = true;
         hasGravity = true;
         hasCollision = true;
@@ -25,7 +25,20 @@ public class Player extends Entity {
     @Override
     public void tick() {
         handleKeys();
+        if(onGround) {
+            acceleration = 3;
+        } else {
+            acceleration = 0.2f;
+        }
         super.tick();
+        if(positionY > 2500) {
+            fallFromGround();
+        }
+    }
+
+    protected void fallFromGround() {
+        positionY = 0;
+        positionX = 0;
     }
     /** handleKeys checks if keys are pressed and does the appropriate action */
     protected void handleKeys() {
